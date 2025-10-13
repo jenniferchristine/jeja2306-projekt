@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using System.Runtime.InteropServices;
 using SleepApp;
 using SleepApp.Models;
 using SleepApp.Services;
@@ -9,19 +10,30 @@ class Program
     {
         while (true)
         {
+            Console.Clear();
+
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("\n" + new string('=', 40) + " 💤 Welcome to SleepApp!💤 " + new string('=', 39));
             Console.ResetColor();
 
-            Console.WriteLine("\nSleepApp helps to determine your sleep habits by answering 5 simple questions.\nYou answer by choosing the option that suits you the best and press enter for the next question.");
-            Console.WriteLine("\nContinue to test by pressing enter or X to end program.\n");
+            Console.WriteLine("\nSleepApp helps to determine your sleep habits by answering 5 simple questions.\nYou answer by choosing the option that suits you the best and press enter for the next question.\n\nContinue to test by pressing enter or X to end program.\n");
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine(new string('=', 106));
             Console.ResetColor();
 
             ConsoleKey key = Console.ReadKey(true).Key;
-            if (key == ConsoleKey.X) return;
-            if (key != ConsoleKey.Enter) continue;
+            if (key == ConsoleKey.X)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("\n🛑 Test has ended.\n");
+                Console.ResetColor();
+                return;
+            }
+            if (key != ConsoleKey.Enter)
+            {
+                Console.WriteLine("\nInvalid choice. Press Enter to start or X to exit.");
+                continue;
+            }
 
             if (!File.Exists("Models/sleepModel.zip"))
             {
@@ -75,16 +87,19 @@ class Program
             Console.ResetColor();
 
             // stänger programmet på x
-            Console.WriteLine("\nPress X to exit or enter to retake test");
+            Console.WriteLine("\nPress X to exit or enter to retake test\n");
             var exitKey = Console.ReadKey(true).Key;
 
             if (exitKey == ConsoleKey.X)
             {
-                Console.WriteLine("\nTest has ended.\n");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("\n🛑 Test has ended.\n");
+                Console.ResetColor();
+                break;
             }
-            else
+            else if (exitKey == ConsoleKey.Enter)
             {
-                Console.WriteLine("\nProgram ended");
+                continue;
             }
         }
     }
