@@ -1,6 +1,7 @@
 ﻿using System.IO.Compression;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Text.Json;
 using SleepApp;
 using SleepApp.Models;
 using SleepApp.Services;
@@ -179,5 +180,28 @@ class Program
         Console.ForegroundColor = color;
         Console.WriteLine(text);
         Console.ResetColor();
+    }
+
+    public static void ShowHistory() // visar tidigare testresultat
+    {
+        if (!File.Exists("Data/sleepRecord.json")) // kontroll om fil ej finns
+        {
+            Console.WriteLine("No record of earlier test.");
+            return;
+        }
+
+        var json = File.ReadAllText("Data/sleepRecord.json"); // läser in innehåll som textsträng om fil finns
+        var records = JsonSerializer.Deserialize<List<SleepRecord>>(json); // konverterar jsontext till lista av objekt
+
+        if (records == null || records.Count == 0) // dubbelkollar om filen är tom eller felaktig
+        {
+            Console.WriteLine("No record of earlier test.");
+            return;
+        }
+
+        foreach (var r in records) // varje post loopas igenom och skrivs ut i text
+        {
+            Console.WriteLine($"{r.Date}: Sleep {r.SleepHours}, Caffeine {r.CaffeineHours}, Stress {r.StressLevel}, Activity {r.ActivityLevel}, Sleep Quality {r.SleepQuality}, Level {r.PredictedLevel}, Score {r.TotalScore}");
+        }
     }
 }
