@@ -2,6 +2,7 @@ using System.Data;
 using Microsoft.ML;
 using Microsoft.ML.Data;
 using SleepApp.Models;
+using System.IO;
 
 namespace SleepApp.Services
 {
@@ -19,16 +20,21 @@ namespace SleepApp.Services
             predEngine = mlContext.Model.CreatePredictionEngine<PersonData, SleepPrediction>(model); // skapar objekt som kan ta in persondata och returnera gissning
         }
 
-        public static string Predict(PersonData input) // metod för att göra gissningen
+        public static string Predict(PersonData input)
         {
-            var prediction = predEngine?.Predict(input);
-            return prediction?.PredictedLabel ?? "Unknown";
+            if (predEngine == null)
+                return "Model not trained";
+
+            var prediction = predEngine.Predict(input);
+            return prediction.Score.ToString("0"); // avrunda till närmaste heltal 1–3
         }
+
+
     }
 
     public class SleepPrediction // output från gissning
     {
-        [ColumnName("PredictedLabel")] // sorterar kolumn
-        public string PredictedLabel { get; set; } = string.Empty;
+        [ColumnName("Score")]
+        public float Score { get; set; }
     }
 }

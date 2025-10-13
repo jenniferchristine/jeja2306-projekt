@@ -12,13 +12,11 @@ namespace SleepApp
             var data = mlContext.Data.LoadFromTextFile<PersonData>(path: "Data/sleepdata.csv", hasHeader: true, separatorChar: ',');
 
             // bygger pipeline
-            var pipeline = mlContext.Transforms.Conversion.MapValueToKey("Label", nameof(PersonData.SleepQuality))
-                .Append(mlContext.Transforms.Concatenate("Features", nameof(PersonData.SleepHours),
-                                                             nameof(PersonData.CaffeineHours),
-                                                             nameof(PersonData.StressLevel),
-                                                             nameof(PersonData.ActivityLevel)))
-                .Append(mlContext.MulticlassClassification.Trainers.SdcaMaximumEntropy())
-                .Append(mlContext.Transforms.Conversion.MapKeyToValue("PredictedLabel"));
+            var pipeline = mlContext.Transforms.Concatenate("Features", nameof(PersonData.SleepHours),
+                                                                     nameof(PersonData.CaffeineHours),
+                                                                     nameof(PersonData.StressLevel),
+                                                                     nameof(PersonData.ActivityLevel))
+                            .Append(mlContext.Regression.Trainers.Sdca(labelColumnName: nameof(PersonData.SleepQuality), maximumNumberOfIterations: 100));
 
             // tränar modell
             var model = pipeline.Fit(data);
