@@ -48,13 +48,22 @@ class Program
 
     static int Ask(string question) // metod för att ställa fråga, ta emot svar och validera
     {
-        Console.WriteLine(question); // visar frågan
-        Console.Write("Answer 1-3: ");
 
-        int value;
-        while (!int.TryParse(Console.ReadLine(), out value) || value < 1 || value > 3)
-            Console.Write("Please enter 1, 2 or 3 as your answer");
-        return value;
-        
+        while (true)
+        {
+            Console.WriteLine(question); // visar frågan
+            Console.Write("Answer 1-3 (or X to exit): ");
+            string? input = Console.ReadLine();
+
+            if (string.IsNullOrEmpty(input))
+                continue;
+
+            if (input.Trim().ToUpper() == "X")
+                Environment.Exit(0); // avslutar programmet direkt
+
+            if (int.TryParse(input, out int value) && value >= 1 && value <= 3)
+                return value;
+        }
+
     }
 }
