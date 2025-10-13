@@ -58,5 +58,25 @@
     "SleepQuality": 1,
     "PredictedLevel": "Poor",
     "TotalScore": 6
+  },
+  {
+    "Date": "2025-10-13T22:41:47.3141083+02:00",
+    "SleepHours": 1,
+    "CaffeineHours": 2,
+    "StressLevel": 3,
+    "ActivityLevel": 2,
+    "SleepQuality": 1,
+    "PredictedLevel": "Good",
+    "TotalScore": 9
+  },
+  {
+    "Date": "2025-10-13T22:45:08.7459391+02:00",
+    "SleepHours": 1,
+    "CaffeineHours": 2,
+    "StressLevel": 3,
+    "ActivityLevel": 1,
+    "SleepQuality": 2,
+    "PredictedLevel": "Average",
+    "TotalScore": 9
   }
 ]

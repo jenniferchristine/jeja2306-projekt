@@ -34,9 +34,7 @@ class Program
                     ShowHeader(" 💤 SleepApp Record💤 ");
                     ShowRecord(); // visar historik från jsonfil
                     EndHeader(101);
-                    Console.WriteLine("\nPress any key to return to return");
-                    Console.ReadKey(true);
-                    Console.Clear();
+                    Console.WriteLine("\nPress Enter to start test or X to exit");
                     continue; // går tillbaka till början av mainloopen
                 }
                 else if (key == ConsoleKey.Enter)
@@ -45,7 +43,7 @@ class Program
                 }
                 else
                 {
-                    Console.WriteLine("\nInvalid choice. Press Enter to start or X to exit."); // loopar denna loop igen
+                    Console.WriteLine("\nInvalid choice. Press Enter to start test or X to exit."); // loopar denna loop igen
                 }
             }
 
