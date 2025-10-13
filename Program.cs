@@ -53,23 +53,17 @@ class Program
             switch (result) // ändrar färg på resultattext
             {
                 case "1":
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("\nResult: " + result);
-                    Console.ResetColor();
+                    TextColor("\nResult: " + result, ConsoleColor.Red);
                     Console.WriteLine("Your sleep needs significant improvement\n");
                     break;
 
                 case "2":
-                    Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.WriteLine("\nResult: " + result);
-                    Console.ResetColor();
+                    TextColor("\nResult: " + result, ConsoleColor.Yellow);
                     Console.WriteLine("Your sleep could improve\n");
                     break;
 
                 case "3":
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine("\nResult: " + result);
-                    Console.ResetColor();
+                    TextColor("\nResult: " + result, ConsoleColor.Green);
                     Console.WriteLine("Your sleep habits seem very good\n");
                     break;
             }
@@ -128,6 +122,13 @@ class Program
     {
         Console.ForegroundColor = ConsoleColor.Green;
         Console.WriteLine(new string('=', length));
+        Console.ResetColor();
+    }
+
+    static void TextColor(string text, ConsoleColor color)
+    {
+        Console.ForegroundColor = color;
+        Console.WriteLine(text);
         Console.ResetColor();
     }
 }
