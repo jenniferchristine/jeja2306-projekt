@@ -116,7 +116,7 @@ class Program
         }
     }
 
-    static void ShowHeader(string title)
+    static void ShowHeader(string title) // metod för att "öppna header"
     {
         Console.ForegroundColor = ConsoleColor.Green;
         Console.WriteLine("\n" + new string('=', 40) + title + new string('=', 39));
@@ -129,7 +129,7 @@ class Program
         Console.ResetColor();
     }
 
-    static void TextColor(string text, ConsoleColor color)
+    static void TextColor(string text, ConsoleColor color) // metod för att färgge text
     {
         Console.ForegroundColor = color;
         Console.WriteLine(text);
