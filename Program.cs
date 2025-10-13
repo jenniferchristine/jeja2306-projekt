@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.IO.Compression;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using SleepApp;
 using SleepApp.Models;
@@ -56,6 +57,40 @@ class Program
 
             ShowHeader(" 💤 SleepApp💤 ");
 
+            string level = result switch // switchsats för nivå av resultatet
+            {
+                "1" => "Poor",
+                "2" => "Average",
+                "3" => "Good",
+                _ => "Unknown"
+            };
+
+            ConsoleColor levelColor = level switch // färglägger resultat
+            {
+                "Poor" => ConsoleColor.Red,
+                "Average" => ConsoleColor.Yellow,
+                "Good" => ConsoleColor.Green,
+                _ => ConsoleColor.White
+            };
+
+            TextColor("\nSleep Level: " + level, levelColor);
+
+            string description = level switch
+            {
+                "Poor" => "Your sleep habits need significant improvement. Try to get more rest and maintain a consistent sleep schedule.",
+                "Average" => "Your sleep is okay but could be better. Consider improving your bedtime routine or reducing stress before bed.",
+                "Good" => "Your sleep habits are very good! Keep up your healthy routines.",
+                _ => ""
+            };
+
+            Console.WriteLine(description + "\n");
+
+            if (data.SleepHours == 1)
+            {
+                TextColor("⚠️  Note: You are getting very little sleep hours. Try to rest more!\n", ConsoleColor.Red);
+            }
+
+            /*
             switch (result) // ändrar färg på resultattext
             {
                 case "1":
@@ -77,7 +112,7 @@ class Program
             if (data.SleepHours == 1 && result == "3")
             {
                 Console.WriteLine("⚠️  Even though your sleeping habits are good you need sleep more hours!\n");
-            }
+            }*/
 
             EndHeader(94);
 
