@@ -20,24 +20,8 @@ class Program
             Console.ResetColor();
 
             ConsoleKey key = Console.ReadKey(true).Key;
-            if (key == ConsoleKey.X)
-            {
-                Console.WriteLine("\nExiting program...");
-                return; // avslutar programmet direkt
-            }
-            else if (key != ConsoleKey.Enter)
-            {
-
-                while (key != ConsoleKey.Enter && key != ConsoleKey.X)
-                {
-                    key = Console.ReadKey(true).Key;
-                    if (key == ConsoleKey.X)
-                    {
-                        Console.WriteLine("\nTest has ended.");
-                        return;
-                    }
-                }
-            }
+            if (key == ConsoleKey.X) return;
+            if (key != ConsoleKey.Enter) continue;
 
             if (!File.Exists("Models/sleepModel.zip"))
             {
