@@ -2,7 +2,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.2.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "jeja2306-projekt", "jeja2306-projekt.csproj", "{047D770A-7A68-1BD5-47D0-E47FA2F9B915}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SleepApp", "SleepApp.csproj", "{047D770A-7A68-1BD5-47D0-E47FA2F9B915}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
