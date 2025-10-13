@@ -60,18 +60,23 @@ class Program
             {
                 case "1":
                     TextColor("\nResult: " + result, ConsoleColor.Red);
-                    Console.WriteLine("Your sleep needs significant improvement\n");
+                    Console.WriteLine("Your sleep habits need significant improvement. Try to get more rest and maintain a consistent sleep schedule.\n");
                     break;
 
                 case "2":
                     TextColor("\nResult: " + result, ConsoleColor.Yellow);
-                    Console.WriteLine("Your sleep could improve\n");
+                    Console.WriteLine("Your sleep is okay but could be better. Consider improving your bedtime routine or reducing stress before bed.\n");
                     break;
 
                 case "3":
                     TextColor("\nResult: " + result, ConsoleColor.Green);
-                    Console.WriteLine("Your sleep habits seem very good\n");
+                    Console.WriteLine("Your sleep habits are very good! Keep up your healthy routines.\n");
                     break;
+            }
+
+            if (data.SleepHours == 1 && result == "3")
+            {
+                Console.WriteLine("⚠️  Even though your sleeping habits are good you need sleep more hours!\n");
             }
 
             EndHeader(94);
