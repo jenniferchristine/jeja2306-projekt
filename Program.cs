@@ -89,7 +89,19 @@ class Program
 
             float totalScore = data.SleepHours + data.CaffeineHours + data.StressLevel + data.ActivityLevel + data.SleepQuality; // beräkna totalpoäng genom summan av alla svar
             Console.WriteLine("\nTotal Score: " + totalScore + " / 15\n\n" + "5–7 → Poor\n8–11 → Average\n12–15 → Good\n"); // skriver ut totalpoäng och vilken nivå poängen hör till
-            
+
+            var record = new SleepRecord // skapar historikpost
+            {
+                SleepHours = data.SleepHours,
+                CaffeineHours = data.CaffeineHours,
+                StressLevel = data.StressLevel,
+                ActivityLevel = data.ActivityLevel,
+                SleepQuality = data.SleepQuality,
+                PredictedLevel = level,
+                TotalScore = totalScore
+            };
+
+            RecordService.SaveRecord(record); // sparar post i jsonfil
 
             if (data.SleepHours == 1) // varnar vid få sömntimmar
             {
