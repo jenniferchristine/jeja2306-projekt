@@ -203,7 +203,17 @@ class Program
         }
 
         var json = File.ReadAllText("Data/sleepRecord.json"); // läser in innehåll som textsträng om fil finns
-        var records = JsonSerializer.Deserialize<List<SleepRecord>>(json); // konverterar jsontext till lista av objekt
+
+        List<SleepRecord>? records = null;
+        try
+        {
+            records = JsonSerializer.Deserialize<List<SleepRecord>>(json);
+        }
+        catch
+        {
+            Console.WriteLine("\n⚠️  Could not read record file.\n");
+            return;
+        }
 
         if (records == null || records.Count == 0) // dubbelkollar om filen är tom eller felaktig
         {
