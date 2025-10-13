@@ -78,13 +78,13 @@ class Program
                 _ => ConsoleColor.White
             };
 
-            TextColor("\nSleep Level: " + level, levelColor);
+            TextColor("\nSleep Habit Level: " + level, levelColor);
 
             string description = level switch // tillför meddelande
             {
-                "Poor" => "Your sleep habits need significant improvement. Try to get more rest and maintain a consistent sleep schedule.",
-                "Average" => "Your sleep is okay but could be better. Consider improving your bedtime routine or reducing stress before bed.",
-                "Good" => "Your sleep habits are very good! Keep up your healthy routines.",
+                "Poor" => "Your sleep habits need significant improvement.\nTry to get more rest and maintain a consistent sleep schedule.",
+                "Average" => "Your sleep is okay but could be better.\nConsider improving your bedtime routine or reducing stress before bed.",
+                "Good" => "Your sleep habits are very good!\nKeep up your healthy routines.",
                 _ => ""
             };
 
