@@ -75,7 +75,7 @@ class Program
 
             TextColor("\nSleep Level: " + level, levelColor);
 
-            string description = level switch
+            string description = level switch // tillför meddelande
             {
                 "Poor" => "Your sleep habits need significant improvement. Try to get more rest and maintain a consistent sleep schedule.",
                 "Average" => "Your sleep is okay but could be better. Consider improving your bedtime routine or reducing stress before bed.",
