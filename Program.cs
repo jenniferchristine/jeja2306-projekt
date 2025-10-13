@@ -8,8 +8,11 @@ class Program
     static void Main() // huvudmetod för att starta program
     {
         Console.ForegroundColor = ConsoleColor.Green;
-        Console.WriteLine("=== Welcome to SleepApp ===");
+        Console.WriteLine("\n=== 💤 Welcome to SleepApp 💤 ===");
         Console.ResetColor();
+
+        Console.WriteLine("\nSleepApp helps to determine your sleep quality by answering 5 simple questions.\nPlease select one of the following options and press enter for next question or X to exit the program.\n");
+        Console.WriteLine(new string('=', 40));
 
         if (!File.Exists("Models/sleepModel.zip"))
         {
@@ -26,14 +29,31 @@ class Program
         data.SleepQuality = Ask("\nHow would you rate your sleep quality?\n\n1) Poor\n2) Average\n3) Good");
 
         // gissar 
-        Console.WriteLine("\nPredicting...");
+        // Console.WriteLine("\nPredicting...");
         var result = SleepPredictionService.Predict(data);
 
-        // visar resultat
-        Console.WriteLine("Based on your answers: " + result);
+        switch (result) // ändrar färg på resultattext
+        {
+            case "1":
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("\nResult: " + result);
+                Console.ResetColor();
+                Console.WriteLine("Your sleep quality could deffintly improve");
+                break;
+
+            case "2":
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("Based on your answers: " + result);
+                break;
+
+            case "3":
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Based on your answers: " + result);
+                break;
+        }
 
         // stänger programmet på x
-        Console.WriteLine("Press X to exit");
+        Console.WriteLine("\nPress X to exit");
         var key = Console.ReadKey(true).Key;
 
         if (key == ConsoleKey.X)
@@ -52,7 +72,7 @@ class Program
         while (true)
         {
             Console.WriteLine(question); // visar frågan
-            Console.Write("Answer 1-3 (or X to exit): ");
+            Console.Write("\nChoose an option: ");
             string? input = Console.ReadLine();
 
             if (string.IsNullOrEmpty(input))
