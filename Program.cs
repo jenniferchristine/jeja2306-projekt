@@ -15,7 +15,7 @@ class Program
             Console.Clear(); // rensa föregående test
 
             ShowHeader(" 💤 Welcome to SleepApp!💤 ");
-            Console.WriteLine("\nSleepApp helps to determine your sleep habits by answering 5 simple questions.\nYou answer by choosing the option that suits you the best and press enter for the next question.\n\nContinue to test by pressing enter, Y for record or X to end program.\n");
+            Console.WriteLine("\nSleepApp helps to determine your sleep habits by answering 5 simple questions.\nYou answer by choosing the option that suits you the best and press enter for the next question.\n\nContinue to test by pressing enter or X to end program.\n");
             EndHeader(106);
 
             while (true)
@@ -198,26 +198,16 @@ class Program
     {
         if (!File.Exists("Data/sleepRecord.json")) // kontroll om fil ej finns
         {
-            Console.WriteLine("\nNo record of earlier test.\n");
+            Console.WriteLine("No record of earlier test.");
             return;
         }
 
         var json = File.ReadAllText("Data/sleepRecord.json"); // läser in innehåll som textsträng om fil finns
-
-        List<SleepRecord>? records = null;
-        try
-        {
-            records = JsonSerializer.Deserialize<List<SleepRecord>>(json);
-        }
-        catch
-        {
-            Console.WriteLine("\n⚠️  Could not read record file.\n");
-            return;
-        }
+        var records = JsonSerializer.Deserialize<List<SleepRecord>>(json); // konverterar jsontext till lista av objekt
 
         if (records == null || records.Count == 0) // dubbelkollar om filen är tom eller felaktig
         {
-            Console.WriteLine("\nNo record of earlier test.\n");
+            Console.WriteLine("No record of earlier test.");
             return;
         }
 

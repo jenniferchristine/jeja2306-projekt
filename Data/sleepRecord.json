@@ -1,10 +1,62 @@
-{
-  "Date": "2025-10-13T22:09:49.8099466+02:00",
-  "SleepHours": 1,
-  "CaffeineHours": 1,
-  "StressLevel": 1,
-  "ActivityLevel": 1,
-  "SleepQuality": 1,
-  "PredictedLevel": "Poor",
-  "TotalScore": 5
-}
+[
+  {
+    "Date": "2025-10-13T22:12:35.3336657+02:00",
+    "SleepHours": 1,
+    "CaffeineHours": 1,
+    "StressLevel": 1,
+    "ActivityLevel": 1,
+    "SleepQuality": 1,
+    "PredictedLevel": "Poor",
+    "TotalScore": 5
+  },
+  {
+    "Date": "2025-10-13T22:13:08.6620928+02:00",
+    "SleepHours": 2,
+    "CaffeineHours": 1,
+    "StressLevel": 2,
+    "ActivityLevel": 3,
+    "SleepQuality": 2,
+    "PredictedLevel": "Average",
+    "TotalScore": 10
+  },
+  {
+    "Date": "2025-10-13T22:30:54.7113687+02:00",
+    "SleepHours": 1,
+    "CaffeineHours": 1,
+    "StressLevel": 1,
+    "ActivityLevel": 1,
+    "SleepQuality": 1,
+    "PredictedLevel": "Poor",
+    "TotalScore": 5
+  },
+  {
+    "Date": "2025-10-13T22:32:08.0876503+02:00",
+    "SleepHours": 1,
+    "CaffeineHours": 1,
+    "StressLevel": 3,
+    "ActivityLevel": 2,
+    "SleepQuality": 3,
+    "PredictedLevel": "Average",
+    "TotalScore": 10
+  },
+  {
+    "Date": "2025-10-13T22:34:34.7856868+02:00",
+    "SleepHours": 2,
+    "CaffeineHours": 3,
+    "StressLevel": 1,
+    "ActivityLevel": 3,
+    "SleepQuality": 2,
+    "PredictedLevel": "Average",
+    "TotalScore": 11
+  },
+  {
+    "Date": "2025-10-13T22:37:00.158879+02:00",
+    "SleepHours": 1,
+    "CaffeineHours": 1,
+    "StressLevel": 1,
+    "ActivityLevel": 2,
+    "SleepQuality": 1,
+    "PredictedLevel": "Poor",
+    "TotalScore": 6
+  }
+]
