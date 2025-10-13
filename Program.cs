@@ -33,11 +33,11 @@ class Program
 
                     ShowHeader(" 💤 SleepApp Record💤 ");
                     ShowRecord(); // visar historik från jsonfil
-                    EndHeader(94);
-                    Console.WriteLine("Press any key to return to return");
+                    EndHeader(101);
+                    Console.WriteLine("\nPress any key to return to return");
                     Console.ReadKey(true);
                     Console.Clear();
-                    return; // går tillbaka till början av mainloopen
+                    continue; // går tillbaka till början av mainloopen
                 }
                 else if (key == ConsoleKey.Enter)
                 {
@@ -198,7 +198,7 @@ class Program
     {
         if (!File.Exists("Data/sleepRecord.json")) // kontroll om fil ej finns
         {
-            Console.WriteLine("No record of earlier test.");
+            Console.WriteLine("\nNo record of earlier test.\n");
             return;
         }
 
@@ -207,7 +207,7 @@ class Program
 
         if (records == null || records.Count == 0) // dubbelkollar om filen är tom eller felaktig
         {
-            Console.WriteLine("No record of earlier test.");
+            Console.WriteLine("\nNo record of earlier test.\n");
             return;
         }
 
