@@ -11,11 +11,7 @@ class Program
         while (true) // loop för att starta om programmet
         {
             Console.Clear(); // rensa föregående test
-
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("\n" + new string('=', 40) + " 💤 Welcome to SleepApp!💤 " + new string('=', 39));
-            Console.ResetColor();
-
+            ShowHeader(" 💤 Welcome to SleepApp!💤 ");
             Console.WriteLine("\nSleepApp helps to determine your sleep habits by answering 5 simple questions.\nYou answer by choosing the option that suits you the best and press enter for the next question.\n\nContinue to test by pressing enter or X to end program.\n");
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine(new string('=', 106));
@@ -54,9 +50,7 @@ class Program
             // gissar 
             var result = SleepPredictionService.Predict(data);
 
-            Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine("\n" + new string('=', 40) + " 💤 SleepApp💤 " + new string('=', 39));
-            Console.ResetColor();
+            ShowHeader(" 💤 SleepApp💤 ");
 
             switch (result) // ändrar färg på resultattext
             {
@@ -82,7 +76,7 @@ class Program
                     break;
             }
 
-            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine(new string('=', 94));
             Console.ResetColor();
 
@@ -109,9 +103,7 @@ class Program
         while (true)
         {
             Console.Clear();
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("\n" + new string('=', 40) + " 💤 SleepApp💤 " + new string('=', 39));
-            Console.ResetColor();
+            ShowHeader(" 💤 SleepApp💤 ");
 
             Console.WriteLine(question);
             Console.Write("\nChoose an option: ");
@@ -128,5 +120,12 @@ class Program
             if (int.TryParse(input, out int value) && value >= 1 && value <= 3)
                 return value;
         }
+    }
+
+    static void ShowHeader(string title)
+    {
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.WriteLine("\n" + new string('=', 40) + title + new string('=', 39));
+        Console.ResetColor();
     }
 }
