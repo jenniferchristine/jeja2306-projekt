@@ -38,7 +38,7 @@ class Program
 
             if (!File.Exists("Models/sleepModel.zip"))
             {
-                TrainModel.Train(); // tränar om modell saknas
+                TrainModel.Train(); // tränar om om modell saknas
             }
 
             var data = new PersonData(); // objekt för användarens svar
@@ -52,7 +52,7 @@ class Program
 
             Console.Clear();
 
-            // gissar 
+            // gissar baserat på datan
             var result = SleepPredictionService.Predict(data);
 
             ShowHeader(" 💤 SleepApp💤 ");
