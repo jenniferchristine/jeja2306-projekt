@@ -13,9 +13,7 @@ class Program
             Console.Clear(); // rensa föregående test
             ShowHeader(" 💤 Welcome to SleepApp!💤 ");
             Console.WriteLine("\nSleepApp helps to determine your sleep habits by answering 5 simple questions.\nYou answer by choosing the option that suits you the best and press enter for the next question.\n\nContinue to test by pressing enter or X to end program.\n");
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine(new string('=', 106));
-            Console.ResetColor();
+            EndHeader(106);
 
             ConsoleKey key = Console.ReadKey(true).Key;
             if (key == ConsoleKey.X)
@@ -76,9 +74,7 @@ class Program
                     break;
             }
 
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine(new string('=', 94));
-            Console.ResetColor();
+            EndHeader(94);
 
             // stänger programmet eller börjar om
             Console.WriteLine("\nPress X to exit or enter to retake test\n");
@@ -126,6 +122,12 @@ class Program
     {
         Console.ForegroundColor = ConsoleColor.Green;
         Console.WriteLine("\n" + new string('=', 40) + title + new string('=', 39));
+        Console.ResetColor();
+    }
+    static void EndHeader(int length) // metod för att "stänga headern"
+    {
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.WriteLine(new string('=', length));
         Console.ResetColor();
     }
 }
