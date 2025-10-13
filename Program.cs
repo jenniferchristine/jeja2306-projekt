@@ -79,18 +79,19 @@ class Program
 
             Console.WriteLine(description + "\n");
 
-            Console.WriteLine("\n📈 Result of your answers:\n");
+            // skriver ut varje svar med text och nivå via switch
+            Console.WriteLine("\n📈 Result of your answers:\n"); // skriver ut användarens egna svar
             Console.WriteLine("- Sleep Hours: " + (data.SleepHours switch { 1 => "1-2h", 2 => "3-6h", 3 => "7-8h", _ => "Unknown" }) + " " + "| " + GetLevel(data.SleepHours));
             Console.WriteLine("- Caffeine Hours: " + (data.CaffeineHours switch { 1 => "1-5h before bed", 2 => "3-6h before bed", 3 => "7-8h before bed", _ => "Unknown" }) + " " + "| " + GetLevel(data.CaffeineHours));
             Console.WriteLine("- Stress Level: " + (data.StressLevel switch { 1 => "High", 2 => "Medium", 3 => "Low", _ => "Unknown" }) + " " + "| " + GetLevel(data.StressLevel));
             Console.WriteLine("- Activity Level: " + (data.ActivityLevel switch { 1 => "Low", 2 => "Medium", 3 => "High", _ => "Unknown" }) + " " + "| " + GetLevel(data.ActivityLevel));
             Console.WriteLine("- Sleep Quality: " + (data.SleepQuality switch { 1 => "Poor", 2 => "Average", 3 => "Good", _ => "Unknown" }) + " " + "| " + GetLevel(data.SleepQuality));
 
-            float totalScore = data.SleepHours + data.CaffeineHours + data.StressLevel + data.ActivityLevel + data.SleepQuality;
-            Console.WriteLine("\nTotal Score: " + totalScore + " / 15\n\n" + "5–7 → Poor\n8–11 → Average\n12–15 → Good\n"); 
+            float totalScore = data.SleepHours + data.CaffeineHours + data.StressLevel + data.ActivityLevel + data.SleepQuality; // beräkna totalpoäng genom summan av alla svar
+            Console.WriteLine("\nTotal Score: " + totalScore + " / 15\n\n" + "5–7 → Poor\n8–11 → Average\n12–15 → Good\n"); // skriver ut totalpoäng och vilken nivå poängen hör till
             
 
-            if (data.SleepHours == 1)
+            if (data.SleepHours == 1) // varnar vid få sömntimmar
             {
                 TextColor("⚠️  Note: You are getting very little sleep hours. Try to rest more!\n", ConsoleColor.Red);
             }
