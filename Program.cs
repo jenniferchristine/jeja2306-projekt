@@ -57,13 +57,7 @@ class Program
 
             ShowHeader(" 💤 SleepApp💤 ");
 
-            string level = result switch // switchsats för nivå av resultatet
-            {
-                "1" => "Poor",
-                "2" => "Average",
-                "3" => "Good",
-                _ => "Unknown"
-            };
+            string level = GetLevel(float.Parse(result));
 
             ConsoleColor levelColor = level switch // färglägger resultat
             {
@@ -85,9 +79,12 @@ class Program
 
             Console.WriteLine(description + "\n");
 
+            Console.WriteLine("Result of answers:");
+            Console.WriteLine("- Sleep Hours: " + (data.SleepHours switch { 1 => "1-2h", 2 => "3-6h", 3 => "7-8h", _ => "Unknown" }) + " " + GetLevel(data.SleepHours));
+
             if (data.SleepHours == 1)
             {
-                TextColor("⚠️  Note: You are getting very little sleep hours. Try to rest more!\n", ConsoleColor.Red);
+                TextColor("\n⚠️  Note: You are getting very little sleep hours. Try to rest more!\n", ConsoleColor.Red);
             }
 
             /*
@@ -130,6 +127,17 @@ class Program
                 continue;
             }
         }
+    }
+
+    static string GetLevel(float result) // metod för resultatparameter, konverterar denna till string och jämför med värden
+    {
+        return result.ToString() switch
+        {
+            "1" => "Poor",
+            "2" => "Average",
+            "3" => "Good",
+            _ => "Unknown"
+        };
     }
 
     static int Ask(string question)
