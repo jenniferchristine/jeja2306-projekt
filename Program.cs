@@ -162,13 +162,33 @@ class Program
             Console.Write("\n\n");
 
             if (string.IsNullOrEmpty(input))
+            {
+                Console.WriteLine("⚠️  Please choose an option.");
+                Console.WriteLine("-- Press any key to try again --");
+                Console.ReadKey(true);
                 continue;
+            }
 
             if (input.Trim().ToUpper() == "X")
+            {
+                TextColor("\n🛑 Test has ended.\n", ConsoleColor.Red);
                 Environment.Exit(0);
+            }
 
-            if (int.TryParse(input, out int value) && value >= 1 && value <= 3)
-                return value;
+            if (int.TryParse(input, out int value))
+            {
+                if (value >= 1 && value <= 3)
+                    return value;
+
+                Console.WriteLine("⚠️  Invalid input. Choose one of the options above (1, 2 or 3).");
+            }
+            else
+            {
+                Console.WriteLine("⚠️  Invalid input: Choose one of the options above (1, 2 or 3).");
+            }
+
+            Console.WriteLine("-- Press any key to try again --");
+            Console.ReadKey(true);
         }
     }
 
