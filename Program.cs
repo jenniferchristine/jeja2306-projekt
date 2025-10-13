@@ -8,9 +8,9 @@ class Program
 {
     static void Main() // huvudmetod för att starta program
     {
-        while (true)
+        while (true) // loop för att starta om programmet
         {
-            Console.Clear();
+            Console.Clear(); // rensa föregående test
 
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("\n" + new string('=', 40) + " 💤 Welcome to SleepApp!💤 " + new string('=', 39));
@@ -86,7 +86,7 @@ class Program
             Console.WriteLine(new string('=', 94));
             Console.ResetColor();
 
-            // stänger programmet på x
+            // stänger programmet eller börjar om
             Console.WriteLine("\nPress X to exit or enter to retake test\n");
             var exitKey = Console.ReadKey(true).Key;
 
