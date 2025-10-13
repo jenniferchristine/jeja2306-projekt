@@ -6,6 +6,13 @@ using SleepApp;
 using SleepApp.Models;
 using SleepApp.Services;
 
+/*
+Att göra: 
+[] Vid nytt test - Varna för överskrivning
+[] Skriv över json med ny data vid fortsättning
+[] Kolla över X i Choose Option? 
+*/
+
 class Program
 {
     static void Main() // huvudmetod för att starta program
