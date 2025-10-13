@@ -2,7 +2,7 @@ using Microsoft.ML.Data;
 
 namespace SleepApp.Models
 {
-    public class Persondata
+    public class PersonData
     {
         [LoadColumn(0)]
         public float SleepHours { get; set; }
