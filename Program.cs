@@ -11,22 +11,28 @@ class Program
         while (true) // loop för att starta om programmet
         {
             Console.Clear(); // rensa föregående test
+
             ShowHeader(" 💤 Welcome to SleepApp!💤 ");
             Console.WriteLine("\nSleepApp helps to determine your sleep habits by answering 5 simple questions.\nYou answer by choosing the option that suits you the best and press enter for the next question.\n\nContinue to test by pressing enter or X to end program.\n");
             EndHeader(106);
 
-            ConsoleKey key = Console.ReadKey(true).Key;
-            if (key == ConsoleKey.X)
+            while (true)
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("\n🛑 Test has ended.\n");
-                Console.ResetColor();
-                return;
-            }
-            if (key != ConsoleKey.Enter)
-            {
-                Console.WriteLine("\nInvalid choice. Press Enter to start or X to exit.");
-                continue;
+                var key = Console.ReadKey(true).Key;
+
+                if (key == ConsoleKey.X)
+                {
+                    TextColor("\n🛑 Test has ended.\n", ConsoleColor.Red);
+                    Environment.Exit(0); // avslutar programmet helt
+                }
+                else if (key == ConsoleKey.Enter)
+                {
+                    break; // fortsätter mainloop
+                }
+                else
+                {
+                    Console.WriteLine("\nInvalid choice. Press Enter to start or X to exit."); // loopar denna loop igen
+                }
             }
 
             if (!File.Exists("Models/sleepModel.zip"))
@@ -76,9 +82,7 @@ class Program
 
             if (exitKey == ConsoleKey.X)
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("\n🛑 Test has ended.\n");
-                Console.ResetColor();
+                TextColor("\n🛑 Test has ended.\n", ConsoleColor.Red);
                 break;
             }
             else if (exitKey == ConsoleKey.Enter)
