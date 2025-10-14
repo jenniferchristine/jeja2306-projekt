@@ -11,6 +11,8 @@ Att göra:
 [] Vid nytt test - Varna för överskrivning
 [] Skriv över json med ny data vid fortsättning
 [] Kolla över X i Choose Option? 
+[] Dela programmet i metoder
+[] Ändra huvudmetoden till icke-loop
 */
 
 class Program
