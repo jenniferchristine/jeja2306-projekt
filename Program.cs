@@ -1,5 +1,6 @@
 ﻿using System.IO.Compression;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text.Json;
 using SleepApp;
@@ -28,77 +29,12 @@ class Program
                 TrainModel.Train(); // tränar om om modell saknas
             }
 
-            var data = new PersonData(); // objekt för användarens svar
+            var data = StartTest();
+            var record = SaveAndCreateResult(data);
 
-            // frågor som ska besvaras
-            data.SleepHours = Ask("\nHow many hours of sleep do you usually get?\n\n1) 1-2h\n2) 3-6h\n3) 7-8h");
-            data.CaffeineHours = Ask("\nHow many hours before bed do you drink caffeine?\n\n1) 1-5h\n2) 6-7h\n3) 8-10h");
-            data.StressLevel = Ask("\nHow high would you rate your stress levels?\n\n1) High\n2) Medium\n3) Low");
-            data.ActivityLevel = Ask("\nHow active are you during the day?\n\n1) Low\n2) Medium\n3) High");
-            data.SleepQuality = Ask("\nHow would you rate your sleep quality?\n\n1) Poor\n2) Average\n3) Good");
+            ShowResult(record);
 
-            Console.Clear();
-
-            // gissar baserat på datan
-            var result = SleepPredictionService.Predict(data);
-
-            ShowHeader(" 💤 SleepApp💤 ");
-
-            string level = GetLevel(float.Parse(result));
-
-            ConsoleColor levelColor = level switch // färglägger resultat
-            {
-                "Poor" => ConsoleColor.Red,
-                "Average" => ConsoleColor.Yellow,
-                "Good" => ConsoleColor.Green,
-                _ => ConsoleColor.White
-            };
-
-            TextColor("\nSleep Habit Level: " + level, levelColor);
-
-            string description = level switch // tillför meddelande
-            {
-                "Poor" => "Your sleep habits need significant improvement.\nTry to get more rest and maintain a consistent sleep schedule.",
-                "Average" => "Your sleep is okay but could be better.\nConsider improving your bedtime routine or reducing stress before bed.",
-                "Good" => "Your sleep habits are very good!\nKeep up your healthy routines.",
-                _ => ""
-            };
-
-            Console.WriteLine(description + "\n");
-
-            // skriver ut varje svar med text och nivå via switch
-            Console.WriteLine("\n📈 Result of your answers:\n"); // skriver ut användarens egna svar
-            Console.WriteLine("- Sleep Hours: " + (data.SleepHours switch { 1 => "1-2h", 2 => "3-6h", 3 => "7-8h", _ => "Unknown" }) + " " + "| " + GetLevel(data.SleepHours));
-            Console.WriteLine("- Caffeine Hours: " + (data.CaffeineHours switch { 1 => "1-5h before bed", 2 => "3-6h before bed", 3 => "7-8h before bed", _ => "Unknown" }) + " " + "| " + GetLevel(data.CaffeineHours));
-            Console.WriteLine("- Stress Level: " + (data.StressLevel switch { 1 => "High", 2 => "Medium", 3 => "Low", _ => "Unknown" }) + " " + "| " + GetLevel(data.StressLevel));
-            Console.WriteLine("- Activity Level: " + (data.ActivityLevel switch { 1 => "Low", 2 => "Medium", 3 => "High", _ => "Unknown" }) + " " + "| " + GetLevel(data.ActivityLevel));
-            Console.WriteLine("- Sleep Quality: " + (data.SleepQuality switch { 1 => "Poor", 2 => "Average", 3 => "Good", _ => "Unknown" }) + " " + "| " + GetLevel(data.SleepQuality));
-
-            float totalScore = data.SleepHours + data.CaffeineHours + data.StressLevel + data.ActivityLevel + data.SleepQuality; // beräkna totalpoäng genom summan av alla svar
-            Console.WriteLine("\nTotal Score: " + totalScore + " / 15\n\n" + "5–7 → Poor\n8–11 → Average\n12–15 → Good\n"); // skriver ut totalpoäng och vilken nivå poängen hör till
-
-            var record = new SleepRecord // skapar historikpost
-            {
-                SleepHours = data.SleepHours,
-                CaffeineHours = data.CaffeineHours,
-                StressLevel = data.StressLevel,
-                ActivityLevel = data.ActivityLevel,
-                SleepQuality = data.SleepQuality,
-                PredictedLevel = level,
-                TotalScore = totalScore
-            };
-
-            RecordService.SaveRecord(record); // sparar post i jsonfil
-
-            if (data.SleepHours == 1) // varnar vid få sömntimmar
-            {
-                TextColor("⚠️  Note: You are getting very little sleep hours. Try to rest more!\n", ConsoleColor.Red);
-            }
-
-            EndHeader(94);
-
-            // stänger programmet eller börjar om
-            Console.WriteLine("\nPress X to exit or enter to retake test\n");
+            Console.WriteLine("\nPress X to exit or enter to retake test\n"); // stänger programmet eller börjar om
             var exitKey = Console.ReadKey(true).Key;
 
             if (exitKey == ConsoleKey.X)
@@ -146,9 +82,85 @@ class Program
         }
     }
 
-    public static void StartTest()
+    static PersonData StartTest()
+    {
+        var data = new PersonData(); // objekt för användarens svar
+
+        // frågor som ska besvaras
+        data.SleepHours = Ask("\nHow many hours of sleep do you usually get?\n\n1) 1-2h\n2) 3-6h\n3) 7-8h");
+        data.CaffeineHours = Ask("\nHow many hours before bed do you drink caffeine?\n\n1) 1-5h\n2) 6-7h\n3) 8-10h");
+        data.StressLevel = Ask("\nHow high would you rate your stress levels?\n\n1) High\n2) Medium\n3) Low");
+        data.ActivityLevel = Ask("\nHow active are you during the day?\n\n1) Low\n2) Medium\n3) High");
+        data.SleepQuality = Ask("\nHow would you rate your sleep quality?\n\n1) Poor\n2) Average\n3) Good");
+
+        Console.Clear();
+        return data;
+    }
+
+    static SleepRecord SaveAndCreateResult(PersonData data)
     {
 
+        var result = SleepPredictionService.Predict(data); // gissar baserat på datan
+        string level = GetLevel(float.Parse(result));
+
+        float totalScore = data.SleepHours + data.CaffeineHours + data.StressLevel + data.ActivityLevel + data.SleepQuality; // beräkna totalpoäng genom summan av alla svar
+
+        var record = new SleepRecord // skapar historikpost
+        {
+            SleepHours = data.SleepHours,
+            CaffeineHours = data.CaffeineHours,
+            StressLevel = data.StressLevel,
+            ActivityLevel = data.ActivityLevel,
+            SleepQuality = data.SleepQuality,
+            PredictedLevel = level,
+            TotalScore = totalScore
+        };
+
+        RecordService.SaveRecord(record); // sparar post i jsonfil
+        return record;
+    }
+
+    static void ShowResult(SleepRecord record)
+    {
+        ShowHeader(" 💤 SleepApp💤 ");
+
+        ConsoleColor levelColor = record.PredictedLevel switch // färglägger resultat
+        {
+            "Poor" => ConsoleColor.Red,
+            "Average" => ConsoleColor.Yellow,
+            "Good" => ConsoleColor.Green,
+            _ => ConsoleColor.White
+        };
+
+        TextColor("\nSleep Habit Level: " + record.PredictedLevel, levelColor);
+
+        string description = record.PredictedLevel switch // tillför meddelande
+        {
+            "Poor" => "Your sleep habits need significant improvement.\nTry to get more rest and maintain a consistent sleep schedule.",
+            "Average" => "Your sleep is okay but could be better.\nConsider improving your bedtime routine or reducing stress before bed.",
+            "Good" => "Your sleep habits are very good!\nKeep up your healthy routines.",
+            _ => ""
+        };
+
+        Console.WriteLine(description + "\n");
+
+        // skriver ut varje svar med text och nivå via switch
+        Console.WriteLine("\n📈 Result of your answers:\n"); // skriver ut användarens egna svar
+        Console.WriteLine("- Sleep Hours: " + (record.SleepHours switch { 1 => "1-2h", 2 => "3-6h", 3 => "7-8h", _ => "Unknown" }) + " " + "| " + GetLevel(record.SleepHours));
+        Console.WriteLine("- Caffeine Hours: " + (record.CaffeineHours switch { 1 => "1-5h before bed", 2 => "3-6h before bed", 3 => "7-8h before bed", _ => "Unknown" }) + " " + "| " + GetLevel(record.CaffeineHours));
+        Console.WriteLine("- Stress Level: " + (record.StressLevel switch { 1 => "High", 2 => "Medium", 3 => "Low", _ => "Unknown" }) + " " + "| " + GetLevel(record.StressLevel));
+        Console.WriteLine("- Activity Level: " + (record.ActivityLevel switch { 1 => "Low", 2 => "Medium", 3 => "High", _ => "Unknown" }) + " " + "| " + GetLevel(record.ActivityLevel));
+        Console.WriteLine("- Sleep Quality: " + (record.SleepQuality switch { 1 => "Poor", 2 => "Average", 3 => "Good", _ => "Unknown" }) + " " + "| " + GetLevel(record.SleepQuality));
+
+
+        Console.WriteLine("\nTotal Score: " + record.TotalScore + " / 15\n\n" + "5–7 → Poor\n8–11 → Average\n12–15 → Good\n"); // skriver ut totalpoäng och vilken nivå poängen hör till
+
+        if (record.SleepHours == 1) // varnar vid få sömntimmar
+        {
+            TextColor("⚠️  Note: You are getting very little sleep hours. Try to rest more!\n", ConsoleColor.Red);
+        }
+
+        EndHeader(94);
     }
 
     static string GetLevel(float result) // metod för resultatparameter, konverterar denna till string och jämför med värden
@@ -260,9 +272,3 @@ class Program
     }
 
 }
-
-/*
-StartTest();
-ShowResult();
-
-*/
