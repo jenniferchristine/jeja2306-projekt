@@ -19,43 +19,10 @@ class Program
 {
     static void Main() // huvudmetod för att starta program
     {
+        ShowStartPage();
+
         while (true) // loop för att starta om programmet
         {
-            Console.Clear(); // rensa föregående test
-
-            ShowHeader(" 💤 Welcome to SleepApp!💤 ");
-            Console.WriteLine("\nSleepApp helps to determine your sleep habits by answering 5 simple questions.\nYou answer by choosing the option that suits you the best and press enter for the next question.\n\nContinue to test by pressing enter or X to end program.\n");
-            EndHeader(106);
-
-            while (true)
-            {
-                var key = Console.ReadKey(true).Key;
-
-                if (key == ConsoleKey.X)
-                {
-                    TextColor("\n🛑 Test has ended.\n", ConsoleColor.Red);
-                    Environment.Exit(0); // avslutar programmet helt
-                }
-                else if (key == ConsoleKey.Y)
-                {
-                    Console.Clear();
-
-                    ShowHeader(" 💤 SleepApp Record💤 ");
-                    ShowRecord(); // visar historik från jsonfil
-                    EndHeader(101);
-                    Console.WriteLine("\nPress Enter to start test or X to exit");
-                    continue; // går tillbaka till början av mainloopen
-                }
-                else if (key == ConsoleKey.Enter)
-                {
-                    break; // fortsätter mainloop
-                }
-                else
-                {
-                    Console.WriteLine("\nInvalid choice. Press Enter to start test or X to exit."); // loopar denna loop igen
-                }
-            }
-
             if (!File.Exists("Models/sleepModel.zip"))
             {
                 TrainModel.Train(); // tränar om om modell saknas
@@ -146,6 +113,44 @@ class Program
         }
     }
 
+    public static void ShowStartPage()
+    {
+        Console.Clear(); // rensa föregående test
+
+        ShowHeader(" 💤 Welcome to SleepApp!💤 ");
+        Console.WriteLine("\nSleepApp helps to determine your sleep habits by answering 5 simple questions.\nYou answer by choosing the option that suits you the best and press enter for the next question.\n\nPress Enter -| Continue to test\nPress Y -----| Show record\nPress X -----| End program \n");
+        EndHeader(106);
+
+        while (true)
+        {
+            var key = Console.ReadKey(true).Key;
+
+            if (key == ConsoleKey.X)
+            {
+                TextColor("\n🛑 Test has ended.\n", ConsoleColor.Red);
+                Environment.Exit(0); // avslutar programmet helt
+            }
+            else if (key == ConsoleKey.Y)
+            {
+                ShowRecord();
+                continue; // går tillbaka till början av mainloopen
+            }
+            else if (key == ConsoleKey.Enter)
+            {
+                break; // fortsätter mainloop
+            }
+            else
+            {
+                Console.WriteLine("\n⚠️  Invalid choice. Press Enter to start test or X to exit."); // loopar denna loop igen
+            }
+        }
+    }
+
+    public static void StartTest()
+    {
+
+    }
+
     static string GetLevel(float result) // metod för resultatparameter, konverterar denna till string och jämför med värden
     {
         return result.ToString() switch
@@ -221,11 +226,11 @@ class Program
         Console.ResetColor();
     }
 
-    public static void ShowRecord() // visar tidigare testresultat
+    public static void GetRecordData() // visar tidigare testresultat
     {
         if (!File.Exists("Data/sleepRecord.json")) // kontroll om fil ej finns
         {
-            Console.WriteLine("No record of earlier test.");
+            Console.WriteLine("\nNo record of earlier test.\n");
             return;
         }
 
@@ -234,7 +239,7 @@ class Program
 
         if (records == null || records.Count == 0) // dubbelkollar om filen är tom eller felaktig
         {
-            Console.WriteLine("No record of earlier test.");
+            Console.WriteLine("\nNo record of earlier test.\n");
             return;
         }
 
@@ -243,11 +248,20 @@ class Program
             Console.WriteLine($"{r.Date}: Sleep {r.SleepHours}, Caffeine {r.CaffeineHours}, Stress {r.StressLevel}, Activity {r.ActivityLevel}, Sleep Quality {r.SleepQuality}, Level {r.PredictedLevel}, Score {r.TotalScore}");
         }
     }
+
+    public static void ShowRecord()
+    {
+        Console.Clear();
+
+        ShowHeader(" 💤 SleepApp Record💤 ");
+        GetRecordData(); // visar historik från jsonfil
+        EndHeader(101);
+        Console.WriteLine("\nPress Enter -| Continue to test\nPress X -----| End program");
+    }
+
 }
 
 /*
-
-ShowStartPage();
 StartTest();
 ShowResult();
 
