@@ -75,7 +75,7 @@ class Program
             }
             else
             {
-                Console.WriteLine("\n⚠️  Invalid choice. Press Enter to start test or X to exit."); // loopar denna loop igen
+                Console.WriteLine("\n❗ Invalid choice. Press Enter to start test or X to exit."); // loopar denna loop igen
             }
         }
     }
@@ -186,15 +186,25 @@ class Program
 
             if (string.IsNullOrEmpty(input))
             {
-                Console.WriteLine("\n⚠️  Please choose an option.\n-- Press any key to try again --");
+                Console.WriteLine("\n❗ Please choose an option.\n-- Press any key to try again --");
                 Console.ReadKey(true);
                 continue;
             }
 
             if (input.Trim().ToUpper() == "X")
             {
-                TextColor("\n🛑 Test has ended.\n", ConsoleColor.Red);
-                Environment.Exit(0);
+                Console.Write("\n⚠️  Are you sure you want to exit? Press Y to exit or N to continue.");
+                var confirm = Console.ReadKey(true).Key;
+
+                if (confirm == ConsoleKey.Y)
+                {
+                    TextColor("\n\n🛑 Test has ended.\n", ConsoleColor.Red);
+                    Environment.Exit(0);
+                }
+                else
+                {
+                    continue;
+                }
             }
 
             if (int.TryParse(input, out int value))
@@ -202,11 +212,11 @@ class Program
                 if (value >= 1 && value <= 3)
                     return value;
 
-                Console.WriteLine("\n⚠️  Invalid input. Choose one of the options above (1, 2 or 3).");
+                Console.WriteLine("\n❗ Invalid input. Choose one of the options above (1, 2 or 3).");
             }
             else
             {
-                Console.WriteLine("\n⚠️  Invalid input: Choose one of the options above (1, 2 or 3).");
+                Console.WriteLine("\n❗ Invalid input: Choose one of the options above (1, 2 or 3).");
             }
 
             Console.WriteLine("-- Press any key to try again --");
