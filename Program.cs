@@ -33,7 +33,7 @@ class Program
         var record = SaveAndCreateResult(data);
         ShowResult(record);
 
-        Console.WriteLine("\nPress X to exit or enter to retake test\n"); // stänger programmet eller börjar om
+        Console.WriteLine("\nPress X to exit or enter to retake test"); // stänger programmet eller börjar om
         var key = Console.ReadKey(true).Key;
 
         if (key == ConsoleKey.Enter)
@@ -52,7 +52,7 @@ class Program
         Console.Clear(); // rensa föregående test
 
         ShowHeader(" 💤 Welcome to SleepApp!💤 ");
-        Console.WriteLine("\nSleepApp helps to determine your sleep habits by answering 5 simple questions.\nYou answer by choosing the option that suits you the best and press enter for the next question.\n\nPress Enter -| Continue to test\nPress Y -----| Show record\nPress X -----| End program \n");
+        Console.WriteLine("\nSleepApp helps to determine your sleep habits by answering 5 simple questions.\nYou answer by choosing the option that suits you the best and press enter for the next question.\n\nPress Enter -| Continue to test\nPress Y -----| Show record\nPress X -----| End program");
         ShowFooter(106);
 
         while (true)
@@ -151,11 +151,11 @@ class Program
         Console.WriteLine("- Sleep Quality: " + (record.SleepQuality switch { 1 => "Poor", 2 => "Average", 3 => "Good", _ => "Unknown" }) + " " + "| " + GetLevel(record.SleepQuality));
 
 
-        Console.WriteLine("\nTotal Score: " + record.TotalScore + " / 15\n\n" + "5–7 → Poor\n8–11 → Average\n12–15 → Good\n"); // skriver ut totalpoäng och vilken nivå poängen hör till
+        Console.WriteLine("\nTotal Score: " + record.TotalScore + " / 15\n\n" + "5–7 → Poor\n8–11 → Average\n12–15 → Good"); // skriver ut totalpoäng och vilken nivå poängen hör till
 
         if (record.SleepHours == 1) // varnar vid få sömntimmar
         {
-            TextColor("⚠️  Note: You are getting very little sleep hours. Try to rest more!\n", ConsoleColor.Red);
+            TextColor("⚠️  Note: You are getting very little sleep hours. Try to rest more!", ConsoleColor.Red);
         }
 
         ShowFooter(94);
@@ -183,12 +183,10 @@ class Program
             Console.Write("\nChoose an option: ");
 
             string? input = Console.ReadLine();
-            Console.Write("\n\n");
 
             if (string.IsNullOrEmpty(input))
             {
-                Console.WriteLine("⚠️  Please choose an option.");
-                Console.WriteLine("-- Press any key to try again --");
+                Console.WriteLine("\n⚠️  Please choose an option.\n-- Press any key to try again --");
                 Console.ReadKey(true);
                 continue;
             }
@@ -204,11 +202,11 @@ class Program
                 if (value >= 1 && value <= 3)
                     return value;
 
-                Console.WriteLine("⚠️  Invalid input. Choose one of the options above (1, 2 or 3).");
+                Console.WriteLine("\n⚠️  Invalid input. Choose one of the options above (1, 2 or 3).");
             }
             else
             {
-                Console.WriteLine("⚠️  Invalid input: Choose one of the options above (1, 2 or 3).");
+                Console.WriteLine("\n⚠️  Invalid input: Choose one of the options above (1, 2 or 3).");
             }
 
             Console.WriteLine("-- Press any key to try again --");
@@ -225,7 +223,7 @@ class Program
     static void ShowFooter(int length) // metod för att "stänga headern"
     {
         Console.ForegroundColor = ConsoleColor.Green;
-        Console.WriteLine(new string('=', length));
+        Console.WriteLine("\n" + new string('=', length));
         Console.ResetColor();
     }
 
@@ -240,7 +238,7 @@ class Program
     {
         if (!File.Exists("Data/sleepRecord.json")) // kontroll om fil ej finns
         {
-            Console.WriteLine("\nNo record of earlier test.\n");
+            Console.WriteLine("\nNo record of earlier test.");
             return;
         }
 
@@ -249,7 +247,7 @@ class Program
 
         if (records == null || records.Count == 0) // dubbelkollar om filen är tom eller felaktig
         {
-            Console.WriteLine("\nNo record of earlier test.\n");
+            Console.WriteLine("\nNo record of earlier test.");
             return;
         }
 
