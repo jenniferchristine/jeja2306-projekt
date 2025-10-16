@@ -192,7 +192,7 @@ class Program
 
             if (input.Trim().ToUpper() == "X")
             {
-                Console.Write("\n⚠️  Are you sure you want to exit? Press Y to exit or N to continue.");
+                Console.Write("\n⚠️  Are you sure you want to exit? Your progress will not be saved.\n-- Press Y to exit or N to continue.");
                 var confirm = Console.ReadKey(true).Key;
 
                 if (confirm == ConsoleKey.Y)
