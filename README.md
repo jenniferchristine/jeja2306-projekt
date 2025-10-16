@@ -19,17 +19,12 @@ SleepApp är en interaktiv applikation som hjälper dig att kartlägga dina söm
 <br>
 
 #### Funktioner
-📊 Sömnregistrering - Du svarar på frågor kring sömntimmar, stress, koffeinintag och aktivitet.
-<br>
-🗓️ Historik - Se datim och resultat för tidigare test.
-<br>
-⚠️ Varningssystem - Om ett test redan registrerats för idag får du en varning innan nytt test sparas.
-<br>
-🤖 Maskininlärning - Prediktion av sömnkvalitet baserat på dina svar.
-<br>
-🌙 Tips och rekommendationer - Feedback (poor, average, good) baserat på nivå av sömnvanor.
-<br>
-📝 Resultat - Se poäng per fråga samt totalpoäng med nivåindikation.
+- 📊 Sömnregistrering - Du svarar på frågor kring sömntimmar, stress, koffeinintag och aktivitet.
+- 🗓️ Historik - Se datim och resultat för tidigare test.
+- ⚠️ Varningssystem - Om ett test redan registrerats för idag får du en varning innan nytt test sparas.
+- 🤖 Maskininlärning - Prediktion av sömnkvalitet baserat på dina svar.
+- 🌙 Tips och rekommendationer - Feedback (poor, average, good) baserat på nivå av sömnvanor.
+- 📝 Resultat - Se poäng per fråga samt totalpoäng med nivåindikation.
 <br>
 <br>
 
