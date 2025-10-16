@@ -4,8 +4,6 @@
 ## Projektarbete DT071G
 
 ### 💤 SleepApp 💤
-
-<br>
 SleepApp är en interaktiv applikation som hjälper dig att kartlägga dina sömnvanor. Du svarar på fem snabba frågor för en uppskattning av din sömnkvalitet samt tips för att förbättra rutiner.
 <br>
 <br>
