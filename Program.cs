@@ -48,7 +48,7 @@ class Program
         Console.Clear(); // rensa föregående test
         ShowHeader(" 💤 Welcome to SleepApp!💤 ");
 
-        Console.WriteLine("\nSleepApp helps to determine your sleep habits by answering 5 simple questions.\nYou answer by choosing the option that suits you the best and press enter for the next question.");
+        Console.WriteLine("\nSleepApp helps to determine your sleeping habits by answering 5 simple questions.\nYou answer by choosing the option that suits you the best and press enter for the next question.");
         ShowLastRegisteredDate();
         Console.WriteLine("\nPress Enter -| Continue to test\nPress Y -----| Show record\nPress X -----| End program");
 
@@ -146,9 +146,9 @@ class Program
 
         string description = record.PredictedLevel switch // tillför meddelande
         {
-            "Poor" => "Your sleep habits need significant improvement.\nTry to get more rest and maintain a consistent sleep schedule.",
-            "Average" => "Your sleep is okay but could be better.\nConsider improving your bedtime routine or reducing stress before bed.",
-            "Good" => "Your sleep habits are very good!\nKeep up your healthy routines.",
+            "Poor" => "Your sleeping habits need significant improvement.\nTry to get more rest and maintain a consistent sleep schedule.",
+            "Average" => "Your sleeping habits is okay but could be better.\nConsider improving your bedtime routine or reducing stress before bed.",
+            "Good" => "Your sleeping habits are very good!\nKeep up your healthy routines.",
             _ => ""
         };
 
