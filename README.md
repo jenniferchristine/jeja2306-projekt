@@ -3,12 +3,12 @@
 
 ### Projektarbete DT071G
 <br>
-[ rubrik ]
+SleepApp
 <br>
-[ beskrivning ]
+SleepApp är en konsolapplikation som mäter dina sömnvanor. 
 <br>
 <br>
-Applikationen innehar följande val: 
-<br>
-- 
-- 
+Applikationen inner flertalet val genom programmets gång
+- Följ instruktionerna för att börja och slutföra testet.
+- För att se tidigare registrerade resultat kan man på startsidan trycka Y.
+- Under programmets gång kan alltid avsluta programmet genom att trycka X.
