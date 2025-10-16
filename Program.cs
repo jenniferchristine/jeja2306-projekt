@@ -8,9 +8,9 @@ using SleepApp.Models;
 using SleepApp.Services;
 
 /*
-Att göra: 
-[] Vid nytt test - Varna för överskrivning
+Att göra:
 [] Skriv över json med ny data vid fortsättning
+[] Vid nytt test - Varna för överskrivning
 */
 
 class Program
@@ -52,9 +52,10 @@ class Program
         Console.Clear(); // rensa föregående test
         ShowHeader(" 💤 Welcome to SleepApp!💤 ");
 
+        Console.WriteLine("\nSleepApp helps to determine your sleep habits by answering 5 simple questions.\nYou answer by choosing the option that suits you the best and press enter for the next question.");
         ShowLastRegisteredDate();
+        Console.WriteLine("\nPress Enter -| Continue to test\nPress Y -----| Show record\nPress X -----| End program");
 
-        Console.WriteLine("\nSleepApp helps to determine your sleep habits by answering 5 simple questions.\nYou answer by choosing the option that suits you the best and press enter for the next question.\n\nPress Enter -| Continue to test\nPress Y -----| Show record\nPress X -----| End program");
         ShowFooter(106);
 
         while (true)
@@ -292,6 +293,6 @@ class Program
         var lastRecord = records.Last(); // tar senaste post
         string formattedDate = lastRecord.Date.ToString("yyyy-MM-dd"); // tar endast datumet
 
-        Console.WriteLine("\nTest last registered: " + formattedDate);
+        Console.WriteLine("\n📅 Test last registered: " + formattedDate);
     }
 }
