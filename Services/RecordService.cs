@@ -33,6 +33,12 @@ namespace SleepApp.Services
                 }
             }
 
+            var existingRecord = records.FirstOrDefault(r => r.Date.Date == DateTime.Now.Date); // tar bort test för dagens datum
+            if (existingRecord != null)
+            {
+                records.Remove(existingRecord);
+            }
+
             records.Add(record); // lägger till ny post
 
             var options = new JsonSerializerOptions { WriteIndented = true }; // sparar listan igen som json
