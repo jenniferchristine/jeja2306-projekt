@@ -317,5 +317,4 @@ class Program
 
         return records.Any(r => r.Date.Date == DateTime.Now.Date); // kollar om test med samma datum finns
     }
-
 }
