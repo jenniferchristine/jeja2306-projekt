@@ -73,8 +73,20 @@ class Program
                 continue; // går tillbaka till början av mainloopen
             }
             else if (key == ConsoleKey.Enter)
-            { /* Kör kontroll för nytt test här */
-                break; // fortsätter mainloop
+            {
+                if (TestForToday())
+                {
+                    Console.WriteLine("\n⚠️  A test for today is already registered. Starting a new test will overwrite it.\n-- Press Y to continue with new test or N to cancel.");
+                    var confirm = Console.ReadKey(true).Key;
+
+                    if (confirm != ConsoleKey.Y)
+                    {
+                        Console.WriteLine("Test cancelled\n\nReturning to start menu...");
+                        ShowStartPage();
+                        return;
+                    }
+                }
+                break;
             }
             else
             {
