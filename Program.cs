@@ -7,12 +7,6 @@ using SleepApp;
 using SleepApp.Models;
 using SleepApp.Services;
 
-/*
-Att göra:
-[] Skriv över json med ny data vid fortsättning
-[] Vid nytt test - Varna för överskrivning
-*/
-
 class Program
 {
     static void Main() // huvudmetod för att starta program
