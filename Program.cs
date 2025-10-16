@@ -33,11 +33,13 @@ class Program
         var record = SaveAndCreateResult(data);
         ShowResult(record);
 
-        Console.WriteLine("\nPress X to exit or enter to retake test"); // stänger programmet eller börjar om
+        Console.WriteLine("\nPress X to exit or Enter to return to menu"); // stänger programmet eller börjar om
         var key = Console.ReadKey(true).Key;
 
         if (key == ConsoleKey.Enter)
         {
+            Console.WriteLine("\nReturning to start menu...");
+            Thread.Sleep(1500);
             Console.Clear();
             RunProgram(); // kör testet igen
         }
@@ -76,12 +78,13 @@ class Program
             {
                 if (TestForToday())
                 {
-                    Console.WriteLine("\n⚠️  A test for today is already registered. Starting a new test will overwrite it.\n-- Press Y to continue with new test or N to cancel.");
+                    Console.WriteLine("\n⚠️  A test for today is already registered. Starting a new test will overwrite it.\n-- Press Y to continue with a new test or N to cancel.");
                     var confirm = Console.ReadKey(true).Key;
 
                     if (confirm != ConsoleKey.Y)
                     {
-                        Console.WriteLine("Test cancelled\n\nReturning to start menu...");
+                        Console.WriteLine("\n🛑 Test cancelled\n\nReturning to start menu...");
+                        Thread.Sleep(1500);
                         ShowStartPage();
                         return;
                     }
@@ -170,7 +173,7 @@ class Program
 
         if (record.SleepHours == 1) // varnar vid få sömntimmar
         {
-            TextColor("⚠️  Note: You are getting very little sleep hours. Try to rest more!", ConsoleColor.Red);
+            TextColor("\n⚠️  Note: You are getting very little sleep hours. Try to rest more!", ConsoleColor.Red);
         }
 
         ShowFooter(94);
