@@ -73,7 +73,7 @@ class Program
                 continue; // går tillbaka till början av mainloopen
             }
             else if (key == ConsoleKey.Enter)
-            {
+            { /* Kör kontroll för nytt test här */
                 break; // fortsätter mainloop
             }
             else
@@ -295,4 +295,18 @@ class Program
 
         Console.WriteLine("\n📅 Test last registered: " + formattedDate);
     }
+
+    static bool TestForToday()
+    {
+        string path = ("Data/sleepRecord.json");
+        if (!File.Exists(path)) return false;
+
+        var json = File.ReadAllText(path);
+        var records = JsonSerializer.Deserialize<List<SleepRecord>>(json);
+
+        if (records == null || records.Count == 0) return false;
+
+        return records.Any(r => r.Date.Date == DateTime.Now.Date); // kollar om test med samma datum finns
+    }
+
 }
