@@ -28,7 +28,15 @@ class Program
             TrainModel.Train(); // tränar om om modell saknas
         }
 
+        /* Test last registered: DATE */
+
         var data = StartTest();
+
+        /* ⚠️  A test has already been registered today. 
+           Would you like to take a new test and replace that result with a new one? 
+
+           Press Y to retest or N to cancel */
+
         var record = SaveAndCreateResult(data);
         ShowResult(record);
 
