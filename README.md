@@ -6,10 +6,13 @@
 ### 💤 SleepApp 💤
 
 <br>
-SleepApp är en konsolapplikation som mäter dina sömnvanor. 
+SleepApp är en interaktiv applikation som hjälper dig att kartlägga dina sömnvanor. Du svarar på fem snabba frågor för en uppskattning av din sömnkvalitet samt tips för att förbättra rutiner.
 <br>
 <br>
-Applikationen inner flertalet val genom programmets gång
+Applikationen inner flertalet val genom programmets gång:
+<br>
 - Följ instruktionerna för att börja och slutföra testet.
+<br>
 - För att se tidigare registrerade resultat kan man på startsidan trycka Y.
+<br>
 - Under programmets gång kan alltid avsluta programmet genom att trycka X.
