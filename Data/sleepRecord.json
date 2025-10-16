@@ -1,12 +1,12 @@
 [
   {
-    "Date": "2025-10-16T10:32:13.077693+02:00",
-    "SleepHours": 3,
-    "CaffeineHours": 2,
+    "Date": "2025-10-16T11:21:32.8549159+02:00",
+    "SleepHours": 1,
+    "CaffeineHours": 3,
     "StressLevel": 2,
     "ActivityLevel": 3,
-    "SleepQuality": 2,
-    "PredictedLevel": "Average",
-    "TotalScore": 12
+    "SleepQuality": 1,
+    "PredictedLevel": "Good",
+    "TotalScore": 10
   }
 ]
