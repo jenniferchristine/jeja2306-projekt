@@ -1,0 +1,12 @@
+[
+  {
+    "Date": "2025-10-16T10:32:13.077693+02:00",
+    "SleepHours": 3,
+    "CaffeineHours": 2,
+    "StressLevel": 2,
+    "ActivityLevel": 3,
+    "SleepQuality": 2,
+    "PredictedLevel": "Average",
+    "TotalScore": 12
+  }
+]
