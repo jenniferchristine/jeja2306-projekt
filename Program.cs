@@ -50,8 +50,10 @@ class Program
     public static void ShowStartPage()
     {
         Console.Clear(); // rensa föregående test
-
         ShowHeader(" 💤 Welcome to SleepApp!💤 ");
+
+        ShowLastRegisteredDate();
+
         Console.WriteLine("\nSleepApp helps to determine your sleep habits by answering 5 simple questions.\nYou answer by choosing the option that suits you the best and press enter for the next question.\n\nPress Enter -| Continue to test\nPress Y -----| Show record\nPress X -----| End program");
         ShowFooter(106);
 
@@ -277,4 +279,19 @@ class Program
         Console.WriteLine("\nPress Enter -| Continue to test\nPress X -----| End program");
     }
 
+    static void ShowLastRegisteredDate() // hitta senaste registrerade test-datum
+    {
+        string path = "Data/sleepRecord.json";
+        if (!File.Exists(path)) return; // gör inget om filen ej finns
+
+        var json = File.ReadAllText(path);
+        var records = JsonSerializer.Deserialize<List<SleepRecord>>(json);
+
+        if (records == null || records.Count == 0) return; // gör inget om listan är tom
+
+        var lastRecord = records.Last(); // tar senaste post
+        string formattedDate = lastRecord.Date.ToString("yyyy-MM-dd"); // tar endast datumet
+
+        Console.WriteLine("\nTest last registered: " + formattedDate);
+    }
 }
