@@ -10,15 +10,10 @@ SleepApp är en interaktiv applikation som hjälper dig att kartlägga dina söm
 
 #### Användning av appen:
 - Starta programmet
-<br>
 - Tryck Enter för att påbörja nytt test, Y för att visa tidigare resultat eller X för att avsluta programmet.
-<br>
 - Svara på 5st frågor genom att skriva siffran för det alternativ som passar dig bäst och Enter.
-<br>
 - Följ instruktioner under programmets gång för att avsluta programmet.
-<br>
 - Ditt resultat visas med en färgkodad indikator och tips för att förbättra din sömn.
-<br>
 - Dagens testresultat sparas i sleepRecord.json
 <br>
 <br>
@@ -40,9 +35,6 @@ SleepApp är en interaktiv applikation som hjälper dig att kartlägga dina söm
 
 #### Teknisk information
 - Skriven i C# med .Net
-<br>
 - Använder ML.NET för att prediktera sömnkvalitet
-<br>
 - Konsolbaserad för att köras lokalt
-<br>
 - Använder JSON för lagring av testresultat
