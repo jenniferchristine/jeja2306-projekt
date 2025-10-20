@@ -281,7 +281,7 @@ class Program
 
         foreach (var r in records) // varje post loopas igenom och skrivs ut i text
         {
-            Console.WriteLine($"{r.Date}: Sleep {r.SleepHours}, Caffeine {r.CaffeineHours}, Stress {r.StressLevel}, Activity {r.ActivityLevel}, Sleep Quality {r.SleepQuality}, Level {r.PredictedLevel}, Score {r.TotalScore}");
+            /*Console.WriteLine($"{r.Date}:\nSleep {r.SleepHours}\nCaffeine {r.CaffeineHours}\nStress {r.StressLevel}\nActivity {r.ActivityLevel}\nSleep Quality {r.SleepQuality}\nLevel {r.PredictedLevel}\nScore {r.TotalScore}");*/
         }
     }
 
