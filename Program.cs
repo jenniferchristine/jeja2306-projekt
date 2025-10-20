@@ -329,7 +329,6 @@ class Program
             Console.WriteLine($"- Level: {r.PredictedLevel}");
             Console.WriteLine($"- Score: {r.TotalScore}");
             Console.WriteLine();
-            /*Console.WriteLine($"{r.Date}:\nSleep {r.SleepHours}\nCaffeine {r.CaffeineHours}\nStress {r.StressLevel}\nActivity {r.ActivityLevel}\nSleep Quality {r.SleepQuality}\nLevel {r.PredictedLevel}\nScore {r.TotalScore}");*/
         }
     }
 
