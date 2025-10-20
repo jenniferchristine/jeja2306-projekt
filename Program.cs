@@ -177,16 +177,13 @@ class Program
         ShowFooter(94);
     }
 
-    static string GetLevel(float result) // metod för resultatparameter, konverterar denna till string och jämför med värden
+    static string GetLevel(float result) => (int)result switch
     {
-        return result.ToString() switch
-        {
-            "1" => "Poor",
-            "2" => "Average",
-            "3" => "Good",
-            _ => "Unknown"
-        };
-    }
+        1 => "Poor",
+        2 => "Average",
+        3 => "Good",
+        _ => "Unknown"
+    };
 
     static int Ask(string question)
     {
