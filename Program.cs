@@ -284,9 +284,33 @@ class Program
         Console.Clear();
 
         ShowHeader(" 💤 SleepApp Record💤 ");
+        Console.WriteLine("");
         GetRecordData(); // visar historik från jsonfil
         ShowFooter(101);
-        Console.WriteLine("\nPress Enter -| Continue to test\nPress X -----| End program");
+        Console.WriteLine("\nPress Enter -| Return to menu\nPress X -----| End program");
+
+        while (true)
+        {
+            var key = Console.ReadKey(true).Key;
+
+            if (key == ConsoleKey.Enter)
+            {
+                Console.WriteLine("\nReturning to start menu...");
+                Thread.Sleep(1500);
+                Console.Clear();
+                RunProgram();
+                return;
+            }
+            else if (key == ConsoleKey.X)
+            {
+                TextColor("\n🛑 Test has ended.\n", ConsoleColor.Red);
+                Environment.Exit(0);
+            }
+            else
+            {
+                Console.WriteLine("\n❗ Invalid choice. Press Enter to return or X to exit.");
+            }
+        }
     }
 
     static void ShowLastRegisteredDate() // hitta senaste registrerade test-datum
