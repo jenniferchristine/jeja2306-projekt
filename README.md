@@ -18,14 +18,14 @@ SleepApp är en interaktiv applikation som hjälper dig att kartlägga dina söm
 
 #### Funktioner
 - 📊 Sömnregistrering - Du svarar på frågor kring sömntimmar, stress, koffeinintag och aktivitet.
-- 🗓️ Historik - Se datim och resultat för tidigare test.
+- 🗓️ Historik - Se datum och resultat för tidigare test.
 - ⚠️ Varningssystem - Om ett test redan registrerats för idag får du en varning innan nytt test sparas.
-- 🤖 Maskininlärning - Prediktion av sömnkvalitet baserat på dina svar.
+- 🤖 Maskininlärning - Förutsägelse av sömnkvalitet baserat på dina svar.
 - 🌙 Tips och rekommendationer - Feedback (poor, average, good) baserat på nivå av sömnvanor.
 - 📝 Resultat - Se poäng per fråga samt totalpoäng med nivåindikation.
 
 #### Teknisk information
 - Skriven i C# med .Net
-- Använder ML.NET för att prediktera sömnkvalitet
+- Använder ML.NET för att förutsäga sömnkvalitet
 - Konsolbaserad för att köras lokalt
 - Använder JSON för lagring av testresultat
