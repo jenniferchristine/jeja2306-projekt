@@ -308,7 +308,7 @@ class Program
             }
             else
             {
-                Console.WriteLine("\n❗ Invalid choice. Press Enter to return or X to exit.");
+                Console.WriteLine("\n❗ Invalid choice. Press Enter to return to menu or X to exit.");
             }
         }
     }
