@@ -9,6 +9,8 @@ using SleepApp.Services;
 
 class Program
 {
+    private const string RecordPath = "Data/sleepRecord.json";
+
     static void Main() // huvudmetod för att starta program
     {
         RunProgram();
@@ -261,13 +263,13 @@ class Program
 
     public static void GetRecordData() // visar tidigare testresultat
     {
-        if (!File.Exists("Data/sleepRecord.json")) // kontroll om fil ej finns
+        if (!File.Exists(RecordPath)) // kontroll om fil ej finns
         {
             Console.WriteLine("\nNo record of earlier test.");
             return;
         }
 
-        var json = File.ReadAllText("Data/sleepRecord.json"); // läser in innehåll som textsträng om fil finns
+        var json = File.ReadAllText(RecordPath); // läser in innehåll som textsträng om fil finns
         var records = JsonSerializer.Deserialize<List<SleepRecord>>(json); // konverterar jsontext till lista av objekt
 
         if (records == null || records.Count == 0) // dubbelkollar om filen är tom eller felaktig
@@ -369,10 +371,9 @@ class Program
 
     static void ShowLastRegisteredDate() // hitta senaste registrerade test-datum
     {
-        string path = "Data/sleepRecord.json";
-        if (!File.Exists(path)) return; // gör inget om filen ej finns
+        if (!File.Exists(RecordPath)) return; // gör inget om filen ej finns
 
-        var json = File.ReadAllText(path);
+        var json = File.ReadAllText(RecordPath);
         var records = JsonSerializer.Deserialize<List<SleepRecord>>(json);
 
         if (records == null || records.Count == 0) return; // gör inget om listan är tom
@@ -385,10 +386,9 @@ class Program
 
     static bool TestForToday()
     {
-        string path = ("Data/sleepRecord.json");
-        if (!File.Exists(path)) return false;
+        if (!File.Exists(RecordPath)) return false;
 
-        var json = File.ReadAllText(path);
+        var json = File.ReadAllText(RecordPath);
         var records = JsonSerializer.Deserialize<List<SleepRecord>>(json);
 
         if (records == null || records.Count == 0) return false;
