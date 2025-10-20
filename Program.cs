@@ -39,6 +39,8 @@ class Program
         }
         else
         {
+            Console.WriteLine("\nEnding program...");
+            Thread.Sleep(1500);
             TextColor("\n🛑 Test has ended.\n", ConsoleColor.Red);
         }
     }
@@ -60,6 +62,8 @@ class Program
 
             if (key == ConsoleKey.X)
             {
+                Console.WriteLine("\nEnding program...");
+                Thread.Sleep(1500);
                 TextColor("\n🛑 Test has ended.\n", ConsoleColor.Red);
                 Environment.Exit(0); // avslutar programmet helt
             }
@@ -210,6 +214,8 @@ class Program
 
                 if (confirm == ConsoleKey.Y)
                 {
+                    Console.WriteLine("\nEnding program...");
+                    Thread.Sleep(1500);
                     TextColor("\n\n🛑 Test has ended.\n", ConsoleColor.Red);
                     Environment.Exit(0);
                 }
@@ -303,6 +309,8 @@ class Program
             }
             else if (key == ConsoleKey.X)
             {
+                Console.WriteLine("\nEnding program...");
+                Thread.Sleep(1500);
                 TextColor("\n🛑 Test has ended.\n", ConsoleColor.Red);
                 Environment.Exit(0);
             }
