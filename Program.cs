@@ -52,7 +52,7 @@ class Program
 
         Console.WriteLine("\nSleepApp helps to determine your sleeping habits by answering 5 simple questions.\nYou answer by choosing the option that suits you the best and press enter for the next question.");
         ShowLastRegisteredDate();
-        Console.WriteLine("\nPress Enter -| Continue to test\nPress Y -----| Show record\nPress X -----| End program");
+        Console.WriteLine("\nPress Enter -| Continue to test\nPress Y -----| Show record\nPress X -----| End program\n");
 
         ShowFooter(106);
 
@@ -167,11 +167,11 @@ class Program
         Console.WriteLine("- Sleep Quality: " + (record.SleepQuality switch { 1 => "Poor", 2 => "Average", 3 => "Good", _ => "Unknown" }) + " " + "| " + GetLevel(record.SleepQuality));
 
 
-        Console.WriteLine("\nTotal Score: " + record.TotalScore + " / 15\n\n" + "5–7 → Poor\n8–11 → Average\n12–15 → Good"); // skriver ut totalpoäng och vilken nivå poängen hör till
+        Console.WriteLine("\nTotal Score: " + record.TotalScore + " / 15\n\n" + "5–7 → Poor\n8–11 → Average\n12–15 → Good\n"); // skriver ut totalpoäng och vilken nivå poängen hör till
 
         if (record.SleepHours == 1) // varnar vid få sömntimmar
         {
-            TextColor("\n⚠️  Note: You are getting very little sleep hours. Try to rest more!", ConsoleColor.Red);
+            TextColor("⚠️  Note: You are getting very little sleep hours. Try to rest more!\n", ConsoleColor.Red);
         }
 
         ShowFooter(94);
@@ -251,7 +251,7 @@ class Program
     static void ShowFooter(int length) // metod för att "stänga headern"
     {
         Console.ForegroundColor = ConsoleColor.Green;
-        Console.WriteLine("\n" + new string('=', length));
+        Console.WriteLine(new string('=', length));
         Console.ResetColor();
     }
 
@@ -281,6 +281,55 @@ class Program
 
         foreach (var r in records) // varje post loopas igenom och skrivs ut i text
         {
+            string sleepText = r.SleepHours switch
+            {
+                1 => "1–2h",
+                2 => "3–6h",
+                3 => "7–8h",
+                _ => "Unknown"
+            };
+
+            string caffeineText = r.CaffeineHours switch
+            {
+                1 => "1–5h before bed",
+                2 => "6–7h before bed",
+                3 => "8–10h before bed",
+                _ => "Unknown"
+            };
+
+            string stressText = r.StressLevel switch
+            {
+                1 => "High",
+                2 => "Medium",
+                3 => "Low",
+                _ => "Unknown"
+            };
+
+            string activityText = r.ActivityLevel switch
+            {
+                1 => "Low",
+                2 => "Medium",
+                3 => "High",
+                _ => "Unknown"
+            };
+
+            string sleepQualityText = r.SleepQuality switch
+            {
+                1 => "Poor",
+                2 => "Average",
+                3 => "Good",
+                _ => "Unknown"
+            };
+
+            Console.WriteLine($"{r.Date:yyyy-MM-dd}:");
+            Console.WriteLine($"- Sleep: {sleepText}");
+            Console.WriteLine($"- Caffeine: {caffeineText}");
+            Console.WriteLine($"- Stress: {stressText}");
+            Console.WriteLine($"- Activity: {activityText}");
+            Console.WriteLine($"- Sleep Quality: {sleepQualityText}");
+            Console.WriteLine($"- Level: {r.PredictedLevel}");
+            Console.WriteLine($"- Score: {r.TotalScore}");
+            Console.WriteLine();
             /*Console.WriteLine($"{r.Date}:\nSleep {r.SleepHours}\nCaffeine {r.CaffeineHours}\nStress {r.StressLevel}\nActivity {r.ActivityLevel}\nSleep Quality {r.SleepQuality}\nLevel {r.PredictedLevel}\nScore {r.TotalScore}");*/
         }
     }
