@@ -1,5 +1,3 @@
-using System; 
-
 namespace SleepApp.Models
 {
     public class SleepRecord // klass för att spara datum, svar, nivå och totalpoäng
