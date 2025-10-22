@@ -251,7 +251,7 @@ class Program
 
                     Thread.Sleep(1500);
                     Console.Clear();
-                    ShowRecord(); // visa uppdaterad lista
+                    ShowAllRecordsWithIndex(records);
                     return;
                 }
                 else
@@ -264,7 +264,7 @@ class Program
                 Console.WriteLine("\nReturning to start menu...");
                 Thread.Sleep(1500);
                 Console.Clear();
-                RunProgram();
+                ShowStartPage();
                 return;
             }
             else if (key == ConsoleKey.X)
