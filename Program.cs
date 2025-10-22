@@ -97,7 +97,8 @@ class Program
 
             if (records.Count == 0)
             {
-                Console.WriteLine("\nNo records found.");
+                Console.WriteLine("\nNo records found.\n");
+                ShowFooter(101);
                 Console.WriteLine("\nPress Enter to return to menu");
                 Console.ReadLine();
                 return; // tillbaka till huvudmeny
@@ -194,6 +195,7 @@ class Program
             Console.WriteLine($"- Sleep Quality: {r.SleepQuality switch { 1 => "Poor", 2 => "Average", 3 => "Good", _ => "Unknown" }}");
             Console.WriteLine($"- Level: {r.PredictedLevel}");
             Console.WriteLine($"- Score: {r.TotalScore}");
+            Console.WriteLine();
         }
     }
 
