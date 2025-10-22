@@ -26,7 +26,7 @@ class Program
         ShowLastRegisteredDate();
 
         Console.WriteLine("\nPress Enter -| Continue to test");
-        Console.WriteLine("Press Y -----| Show record");
+        Console.WriteLine("Press R -----| Show record");
         Console.WriteLine("Press X -----| End program\n");
         ShowFooter(106);
 
@@ -39,7 +39,7 @@ class Program
             TextColor("\n🛑 Test has ended.\n", ConsoleColor.Red);
             Environment.Exit(0);
         }
-        else if (key == ConsoleKey.Y)
+        else if (key == ConsoleKey.R)
         {
             ShowRecord();
             return; // återgå till huvudloopen
@@ -81,7 +81,7 @@ class Program
         }
         else
         {
-            Console.WriteLine("\n❗ Invalid choice. Press Enter, Y or X.");
+            Console.WriteLine("\n❗ Invalid choice. Press Enter, R or X.");
             Thread.Sleep(1000);
         }
     }
@@ -119,7 +119,8 @@ class Program
                 if (int.TryParse(Console.ReadLine(), out int index) && index >= 1 && index <= records.Count)
                 {
                     var recordToDelete = records[index - 1];
-                    Console.WriteLine($"\n⚠️  Are you sure you want to delete the record from {recordToDelete.Date:yyyy-MM-dd}? (Y/N)");
+                    Console.WriteLine($"\n⚠️  Are you sure you want to delete the record from {recordToDelete.Date:yyyy-MM-dd}?");
+                    Console.WriteLine("-- Press Y to continue with a new test or N to cancel.");
                     var confirm = Console.ReadKey(true).Key;
 
                     if (confirm == ConsoleKey.Y)
@@ -228,7 +229,8 @@ class Program
 
             if (input.Trim().ToUpper() == "X")
             {
-                Console.Write("\n⚠️  Are you sure you want to exit? Your progress will not be saved.\nY/N: ");
+                Console.Write("\n⚠️  Are you sure you want to exit? Your progress will not be saved.");
+                Console.WriteLine("-- Press Y to continue with a new test or N to cancel.");
                 if (Console.ReadKey(true).Key == ConsoleKey.Y)
                 {
                     Console.WriteLine("\nEnding program...");
