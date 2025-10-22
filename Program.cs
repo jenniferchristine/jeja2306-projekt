@@ -86,6 +86,37 @@ class Program
         }
     }
 
+    static bool GetLatestTestDate()
+    {
+        if (!File.Exists(RecordPath)) return false;
+
+        var json = File.ReadAllText(RecordPath);
+        var records = JsonSerializer.Deserialize<List<SleepRecord>>(json);
+        return records != null && records.Any(r => r.Date.Date == DateTime.Now.Date);
+    }
+
+    static void ShowLastRegisteredDate()
+    {
+        if (!File.Exists(RecordPath)) return;
+
+        var json = File.ReadAllText(RecordPath);
+        var records = JsonSerializer.Deserialize<List<SleepRecord>>(json);
+        if (records == null || records.Count == 0) return;
+
+
+        var lastRecord = records.OrderByDescending(r => r.Date).First(); // hitta den senaste posten baserat på date
+        Console.WriteLine("\n📅 Test last registered: " + lastRecord.Date.ToString("yyyy-MM-dd"));
+    }
+
+    public static List<SleepRecord> GetRecordData()
+    {
+        if (!File.Exists(RecordPath)) return new List<SleepRecord>();
+
+        var json = File.ReadAllText(RecordPath);
+        var records = JsonSerializer.Deserialize<List<SleepRecord>>(json);
+        return records ?? new List<SleepRecord>();
+    }
+
     public static void ShowRecord()
     {
         while (true)
@@ -150,37 +181,6 @@ class Program
                 Thread.Sleep(1000);
             }
         }
-    }
-
-    static bool GetLatestTestDate()
-    {
-        if (!File.Exists(RecordPath)) return false;
-
-        var json = File.ReadAllText(RecordPath);
-        var records = JsonSerializer.Deserialize<List<SleepRecord>>(json);
-        return records != null && records.Any(r => r.Date.Date == DateTime.Now.Date);
-    }
-
-    static void ShowLastRegisteredDate()
-    {
-        if (!File.Exists(RecordPath)) return;
-
-        var json = File.ReadAllText(RecordPath);
-        var records = JsonSerializer.Deserialize<List<SleepRecord>>(json);
-        if (records == null || records.Count == 0) return;
-
-        
-        var lastRecord = records.OrderByDescending(r => r.Date).First(); // hitta den senaste posten baserat på date
-        Console.WriteLine("\n📅 Test last registered: " + lastRecord.Date.ToString("yyyy-MM-dd"));
-    }
-
-    public static List<SleepRecord> GetRecordData()
-    {
-        if (!File.Exists(RecordPath)) return new List<SleepRecord>();
-
-        var json = File.ReadAllText(RecordPath);
-        var records = JsonSerializer.Deserialize<List<SleepRecord>>(json);
-        return records ?? new List<SleepRecord>();
     }
 
     private static void ShowAllRecordsWithIndex(List<SleepRecord> records)
