@@ -9,11 +9,12 @@ class Program
 
     static void Main()
     {
-        while (true) // huvudloop för hela programmet
+        while (true) // Huvudloop
         {
             ShowStartPage();
         }
     }
+
     public static void ShowStartPage()
     {
         Console.Clear();
@@ -28,107 +29,62 @@ class Program
         Console.WriteLine("Press X -----| End program\n");
         ShowFooter(106);
 
-        while (true)
-        {
-            var key = Console.ReadKey(true).Key;
+        var key = Console.ReadKey(true).Key;
 
-            if (key == ConsoleKey.X)
+        if (key == ConsoleKey.X)
+        {
+            Console.WriteLine("\nEnding program...");
+            Thread.Sleep(1500);
+            TextColor("\n🛑 Test has ended.\n", ConsoleColor.Red);
+            Environment.Exit(0);
+        }
+        else if (key == ConsoleKey.Y)
+        {
+            ShowRecord();
+            return; // återgå till huvudloopen
+        }
+        else if (key == ConsoleKey.Enter)
+        {
+            if (!File.Exists("Models/sleepModel.zip"))
+                TrainModel.Train();
+
+            if (GetLatestTestDate())
+            {
+                Console.WriteLine("\n⚠️  A test for today is already registered.");
+                Console.WriteLine("-- Press Y to continue with a new test or N to cancel.");
+                var confirm = Console.ReadKey(true).Key;
+
+                if (confirm != ConsoleKey.Y)
+                {
+                    Console.WriteLine("\n🛑 Test cancelled\nReturning to start menu...");
+                    Thread.Sleep(1500);
+                    return;
+                }
+            }
+
+            var data = StartTest();
+            var record = SaveAndCreateResult(data);
+            ShowResult(record);
+
+            Console.WriteLine("\nPress Enter to return to menu or X to exit");
+            var nextKey = Console.ReadKey(true).Key;
+            if (nextKey == ConsoleKey.X)
             {
                 Console.WriteLine("\nEnding program...");
                 Thread.Sleep(1500);
                 TextColor("\n🛑 Test has ended.\n", ConsoleColor.Red);
                 Environment.Exit(0);
             }
-            else if (key == ConsoleKey.Y)
-            {
-                ShowRecord();
-                return; // återvänd till huvudloopen
-            }
-            else if (key == ConsoleKey.Enter)
-            {
-                if (!File.Exists("Models/sleepModel.zip"))
-                {
-                    TrainModel.Train();
-                }
 
-                if (GetLatestTestDate())
-                {
-                    Console.WriteLine("\n⚠️  A test for today is already registered.");
-                    Console.WriteLine("-- Press Y to continue with a new test or N to cancel.");
-                    var confirm = Console.ReadKey(true).Key;
-
-                    if (confirm != ConsoleKey.Y)
-                    {
-                        Console.WriteLine("\n🛑 Test cancelled\nReturning to start menu...");
-                        Thread.Sleep(1500);
-                        return;
-                    }
-                }
-
-                var data = StartTest();
-                var record = SaveAndCreateResult(data);
-                ShowResult(record);
-
-                Console.WriteLine("\nPress Enter to return to menu or X to exit");
-                var nextKey = Console.ReadKey(true).Key;
-                if (nextKey == ConsoleKey.X)
-                {
-                    Console.WriteLine("\nEnding program...");
-                    Thread.Sleep(1500);
-                    TextColor("\n🛑 Test has ended.\n", ConsoleColor.Red);
-                    Environment.Exit(0);
-                }
-
-                return; // återgå till huvudloopen
-            }
-            else
-            {
-                Console.WriteLine("\n❗ Invalid choice. Press Enter, Y or X.");
-            }
+            return; // tillbaka till huvudloopen
         }
-    }
-    static bool GetLatestTestDate()
-    {
-        if (!File.Exists(RecordPath)) return false;
-
-        var json = File.ReadAllText(RecordPath);
-        var records = JsonSerializer.Deserialize<List<SleepRecord>>(json);
-        return records != null && records.Any(r => r.Date.Date == DateTime.Now.Date);
-    }
-    static void ShowLastRegisteredDate()
-    {
-        if (!File.Exists(RecordPath)) return;
-
-        var json = File.ReadAllText(RecordPath);
-        var records = JsonSerializer.Deserialize<List<SleepRecord>>(json);
-        if (records == null || records.Count == 0) return;
-
-        var lastRecord = records.Last();
-        Console.WriteLine("\n📅 Test last registered: " + lastRecord.Date.ToString("yyyy-MM-dd"));
-    }
-    public static List<SleepRecord> GetRecordData()
-    {
-        if (!File.Exists(RecordPath)) return new List<SleepRecord>();
-
-        var json = File.ReadAllText(RecordPath);
-        var records = JsonSerializer.Deserialize<List<SleepRecord>>(json);
-        return records ?? new List<SleepRecord>();
-    }
-    private static void ShowAllRecordsWithIndex(List<SleepRecord> records)
-    {
-        for (int i = 0; i < records.Count; i++)
+        else
         {
-            var r = records[i];
-            Console.WriteLine($"\n[{i + 1}] {r.Date:yyyy-MM-dd}:");
-            Console.WriteLine($"- Sleep: {r.SleepHours switch { 1 => "1–2h", 2 => "3–6h", 3 => "7–8h", _ => "Unknown" }}");
-            Console.WriteLine($"- Caffeine: {r.CaffeineHours switch { 1 => "1–5h before bed", 2 => "6–7h before bed", 3 => "8–10h before bed", _ => "Unknown" }}");
-            Console.WriteLine($"- Stress: {r.StressLevel switch { 1 => "High", 2 => "Medium", 3 => "Low", _ => "Unknown" }}");
-            Console.WriteLine($"- Activity: {r.ActivityLevel switch { 1 => "Low", 2 => "Medium", 3 => "High", _ => "Unknown" }}");
-            Console.WriteLine($"- Sleep Quality: {r.SleepQuality switch { 1 => "Poor", 2 => "Average", 3 => "Good", _ => "Unknown" }}");
-            Console.WriteLine($"- Level: {r.PredictedLevel}");
-            Console.WriteLine($"- Score: {r.TotalScore}");
+            Console.WriteLine("\n❗ Invalid choice. Press Enter, Y or X.");
+            Thread.Sleep(1000);
         }
     }
+
     public static void ShowRecord()
     {
         while (true)
@@ -143,7 +99,7 @@ class Program
                 Console.WriteLine("\nNo records found.");
                 Console.WriteLine("\nPress Enter to return to menu");
                 Console.ReadLine();
-                return;
+                return; // tillbaka till huvudmeny
             }
 
             ShowAllRecordsWithIndex(records);
@@ -163,6 +119,7 @@ class Program
                     var recordToDelete = records[index - 1];
                     Console.WriteLine($"\n⚠️  Are you sure you want to delete the record from {recordToDelete.Date:yyyy-MM-dd}? (Y/N)");
                     var confirm = Console.ReadKey(true).Key;
+
                     if (confirm == ConsoleKey.Y)
                     {
                         records.RemoveAt(index - 1);
@@ -170,17 +127,12 @@ class Program
                         Console.WriteLine("\n✅ Record deleted successfully!");
                         Thread.Sleep(1500);
                     }
-                    continue; // loopar om och laddar filen igen
                 }
-                else
-                {
-                    Console.WriteLine("\n❗ Invalid number.");
-                    Thread.Sleep(1000);
-                }
+                continue; // ladda om listan
             }
             else if (key == ConsoleKey.Enter)
             {
-                return; // tillbaka till huvudmeny
+                return; // tillbaka till huvudloopen
             }
             else if (key == ConsoleKey.X)
             {
@@ -196,6 +148,53 @@ class Program
             }
         }
     }
+
+    static bool GetLatestTestDate()
+    {
+        if (!File.Exists(RecordPath)) return false;
+
+        var json = File.ReadAllText(RecordPath);
+        var records = JsonSerializer.Deserialize<List<SleepRecord>>(json);
+        return records != null && records.Any(r => r.Date.Date == DateTime.Now.Date);
+    }
+
+    static void ShowLastRegisteredDate()
+    {
+        if (!File.Exists(RecordPath)) return;
+
+        var json = File.ReadAllText(RecordPath);
+        var records = JsonSerializer.Deserialize<List<SleepRecord>>(json);
+        if (records == null || records.Count == 0) return;
+
+        var lastRecord = records.Last();
+        Console.WriteLine("\n📅 Test last registered: " + lastRecord.Date.ToString("yyyy-MM-dd"));
+    }
+
+    public static List<SleepRecord> GetRecordData()
+    {
+        if (!File.Exists(RecordPath)) return new List<SleepRecord>();
+
+        var json = File.ReadAllText(RecordPath);
+        var records = JsonSerializer.Deserialize<List<SleepRecord>>(json);
+        return records ?? new List<SleepRecord>();
+    }
+
+    private static void ShowAllRecordsWithIndex(List<SleepRecord> records)
+    {
+        for (int i = 0; i < records.Count; i++)
+        {
+            var r = records[i];
+            Console.WriteLine($"\n[{i + 1}] {r.Date:yyyy-MM-dd}:");
+            Console.WriteLine($"- Sleep: {r.SleepHours switch { 1 => "1–2h", 2 => "3–6h", 3 => "7–8h", _ => "Unknown" }}");
+            Console.WriteLine($"- Caffeine: {r.CaffeineHours switch { 1 => "1–5h before bed", 2 => "6–7h before bed", 3 => "8–10h before bed", _ => "Unknown" }}");
+            Console.WriteLine($"- Stress: {r.StressLevel switch { 1 => "High", 2 => "Medium", 3 => "Low", _ => "Unknown" }}");
+            Console.WriteLine($"- Activity: {r.ActivityLevel switch { 1 => "Low", 2 => "Medium", 3 => "High", _ => "Unknown" }}");
+            Console.WriteLine($"- Sleep Quality: {r.SleepQuality switch { 1 => "Poor", 2 => "Average", 3 => "Good", _ => "Unknown" }}");
+            Console.WriteLine($"- Level: {r.PredictedLevel}");
+            Console.WriteLine($"- Score: {r.TotalScore}");
+        }
+    }
+
     static PersonData StartTest()
     {
         var data = new PersonData();
@@ -209,6 +208,7 @@ class Program
         Console.Clear();
         return data;
     }
+
     static int Ask(string question)
     {
         while (true)
@@ -244,6 +244,7 @@ class Program
             Thread.Sleep(1000);
         }
     }
+
     static string GetLevel(float result) => (int)result switch
     {
         1 => "Poor",
@@ -251,6 +252,7 @@ class Program
         3 => "Good",
         _ => "Unknown"
     };
+
     static SleepRecord SaveAndCreateResult(PersonData data)
     {
         var result = SleepPredictionService.Predict(data);
@@ -272,6 +274,7 @@ class Program
         RecordService.SaveRecord(record);
         return record;
     }
+
     static void ShowResult(SleepRecord record)
     {
         ShowHeader(" 💤 SleepApp💤 ");
@@ -309,18 +312,21 @@ class Program
 
         ShowFooter(94);
     }
+
     static void ShowHeader(string title)
     {
         Console.ForegroundColor = ConsoleColor.Green;
         Console.WriteLine("\n" + new string('=', 40) + title + new string('=', 39));
         Console.ResetColor();
     }
+
     static void ShowFooter(int length)
     {
         Console.ForegroundColor = ConsoleColor.Green;
         Console.WriteLine(new string('=', length));
         Console.ResetColor();
     }
+
     static void TextColor(string text, ConsoleColor color)
     {
         Console.ForegroundColor = color;
