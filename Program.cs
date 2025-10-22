@@ -1,4 +1,6 @@
-﻿using System.Text.Json;
+﻿using System.Security.Cryptography.X509Certificates;
+using System.Text.Json;
+using Microsoft.VisualBasic;
 using SleepApp;
 using SleepApp.Models;
 using SleepApp.Services;
@@ -117,12 +119,12 @@ class Program
 
         Console.WriteLine("\n📅 Test last registered: " + formattedDate);
     }
-    public static void GetRecordData() // visar tidigare testresultat
+    public static List<SleepRecord> GetRecordData() // visar tidigare testresultat
     {
         if (!File.Exists(RecordPath)) // kontroll om fil ej finns
         {
             Console.WriteLine("\nNo record of earlier test.");
-            return;
+            return new List<SleepRecord>();
         }
 
         var json = File.ReadAllText(RecordPath); // läser in innehåll som textsträng om fil finns
@@ -131,12 +133,24 @@ class Program
         if (records == null || records.Count == 0) // dubbelkollar om filen är tom eller felaktig
         {
             Console.WriteLine("\nNo record of earlier test.");
-            return;
+            return new List<SleepRecord>();
         }
 
-        foreach (var r in records) // varje post loopas igenom och skrivs ut i text
+        return records;
+    }
+    private static void ShowAllRecordsWithIndex(List<SleepRecord> records)
+    {
+        for (int i = 0; i < records.Count; i++)
         {
-            GetAndShowRecordText(r);
+            var r = records[i];
+            Console.WriteLine($"\n[{i + 1}] {r.Date:yyyy-MM-dd}:");
+            Console.WriteLine($"- Sleep: {r.SleepHours switch { 1 => "1–2h", 2 => "3–6h", 3 => "7–8h", _ => "Unknown" }}");
+            Console.WriteLine($"- Caffeine: {r.CaffeineHours switch { 1 => "1–5h before bed", 2 => "6–7h before bed", 3 => "8–10h before bed", _ => "Unknown" }}");
+            Console.WriteLine($"- Stress: {r.StressLevel switch { 1 => "High", 2 => "Medium", 3 => "Low", _ => "Unknown" }}");
+            Console.WriteLine($"- Activity: {r.ActivityLevel switch { 1 => "Low", 2 => "Medium", 3 => "High", _ => "Unknown" }}");
+            Console.WriteLine($"- Sleep Quality: {r.SleepQuality switch { 1 => "Poor", 2 => "Average", 3 => "Good", _ => "Unknown" }}");
+            Console.WriteLine($"- Level: {r.PredictedLevel}");
+            Console.WriteLine($"- Score: {r.TotalScore}");
         }
     }
     private static void GetAndShowRecordText(SleepRecord r)
@@ -194,18 +208,58 @@ class Program
     public static void ShowRecord()
     {
         Console.Clear();
-
         ShowHeader(" 💤 SleepApp Record💤 ");
-        Console.WriteLine("");
-        GetRecordData(); // visar historik från jsonfil
+
+        var records = GetRecordData();
+
+        if (records.Count == 0)
+        {
+            Console.WriteLine("\nNo records found.");
+            Console.WriteLine("\nPress Enter to return to menu");
+            Console.ReadLine();
+            RunProgram();
+            return;
+        }
+
+        ShowAllRecordsWithIndex(records);
         ShowFooter(101);
-        Console.WriteLine("\nPress Enter -| Return to menu\nPress X -----| End program");
+        Console.WriteLine("\nPress D -----| Delete a result\nPress Enter -| Return to menu\nPress X -----| End program");
 
         while (true)
         {
             var key = Console.ReadKey(true).Key;
 
-            if (key == ConsoleKey.Enter)
+            if (key == ConsoleKey.D)
+            {
+                Console.Write("\nPress the number of the record to delete and then Enter: ");
+                if (int.TryParse(Console.ReadLine(), out int index) && index >= 1 && index <= records.Count)
+                {
+                    var recordToDelete = records[index - 1];
+                    Console.WriteLine($"\n⚠️  Are you sure you want to delete the record from {recordToDelete.Date:yyyy-MM-dd}? (Y/N)");
+                    var confirm = Console.ReadKey(true).Key;
+
+                    if (confirm == ConsoleKey.Y)
+                    {
+                        records.RemoveAt(index - 1);
+                        File.WriteAllText(RecordPath, JsonSerializer.Serialize(records, new JsonSerializerOptions { WriteIndented = true }));
+                        Console.WriteLine("\n✅ Record deleted successfully!");
+                    }
+                    else
+                    {
+                        Console.WriteLine("\nDeletion cancelled.");
+                    }
+
+                    Thread.Sleep(1500);
+                    Console.Clear();
+                    ShowRecord(); // visa uppdaterad lista
+                    return;
+                }
+                else
+                {
+                    Console.WriteLine("\n❗ Invalid number.");
+                }
+            }
+            else if (key == ConsoleKey.Enter)
             {
                 Console.WriteLine("\nReturning to start menu...");
                 Thread.Sleep(1500);
@@ -222,7 +276,7 @@ class Program
             }
             else
             {
-                Console.WriteLine("\n❗ Invalid choice. Press Enter to return to menu or X to exit.");
+                Console.WriteLine("\n❗ Invalid choice. Press D, Enter or X.");
             }
         }
     }
