@@ -146,7 +146,7 @@ class Program
 
             if (key == ConsoleKey.D)
             {
-                Console.Write("\nPress the number of the record to delete: ");
+                Console.Write("\nPress the number of the record to delete and then Enter: ");
                 if (int.TryParse(Console.ReadLine(), out int index) && index >= 1 && index <= records.Count)
                 {
                     var recordToDelete = records[index - 1];
