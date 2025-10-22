@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using Newtonsoft.Json.Serialization;
 using SleepApp;
 using SleepApp.Models;
 using SleepApp.Services;
@@ -166,7 +167,8 @@ class Program
         var records = JsonSerializer.Deserialize<List<SleepRecord>>(json);
         if (records == null || records.Count == 0) return;
 
-        var lastRecord = records.Last();
+        
+        var lastRecord = records.OrderByDescending(r => r.Date).First(); // hitta den senaste posten baserat på date
         Console.WriteLine("\n📅 Test last registered: " + lastRecord.Date.ToString("yyyy-MM-dd"));
     }
 
