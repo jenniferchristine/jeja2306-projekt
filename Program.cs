@@ -124,7 +124,7 @@ class Program
             Console.Clear();
             ShowHeader(" 💤 SleepApp Record💤 ");
 
-            var records = GetRecordData();
+            var records = GetRecordData(); // läs filen på nytt varje gång
 
             if (records.Count == 0)
             {
@@ -135,7 +135,7 @@ class Program
                 return; // tillbaka till huvudmeny
             }
 
-            ShowAllRecordsWithIndex(records);
+            ShowAllRecordsWithIndex(records); // visa poster med rätt index
             ShowFooter(101);
 
             Console.WriteLine("\nPress D -----| Delete a result");
@@ -156,8 +156,8 @@ class Program
 
                     if (confirm == ConsoleKey.Y)
                     {
-                        records.RemoveAt(index - 1);
-                        File.WriteAllText(RecordPath, JsonSerializer.Serialize(records, new JsonSerializerOptions { WriteIndented = true }));
+                        records.RemoveAt(index - 1); // ta bort posten
+                        File.WriteAllText(RecordPath, JsonSerializer.Serialize(records, new JsonSerializerOptions { WriteIndented = true })); // skriv tillbaka filen
                         Console.WriteLine("\n✅ Record deleted successfully!");
                         Thread.Sleep(1500);
                     }
