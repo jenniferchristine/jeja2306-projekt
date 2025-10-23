@@ -19,12 +19,4 @@ namespace SleepApp.Models
         [LoadColumn(4)]
         public float SleepQuality { get; set; }
     }
-
-/*
-    public class PersonDataResult
-    {
-        PersonData Data { get; set; }
-
-        DateTime Date { get; set; }
-    }*/
 }
