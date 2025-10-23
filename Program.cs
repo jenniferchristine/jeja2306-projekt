@@ -193,7 +193,7 @@ class Program
             Console.WriteLine($"- Stress: {r.StressLevel switch { 1 => "High", 2 => "Medium", 3 => "Low", _ => "Unknown" }}");
             Console.WriteLine($"- Activity: {r.ActivityLevel switch { 1 => "Low", 2 => "Medium", 3 => "High", _ => "Unknown" }}");
             Console.WriteLine($"- Sleep Quality: {r.SleepQuality switch { 1 => "Poor", 2 => "Average", 3 => "Good", _ => "Unknown" }}");
-            Console.WriteLine($"- Level: {r.PredictedLevel}");
+            Console.WriteLine($"- Predicted Level: {r.PredictedLevel}");
             Console.WriteLine($"- Score: {r.TotalScore}");
             Console.WriteLine();
         }
@@ -261,6 +261,7 @@ class Program
     static SleepRecord SaveAndCreateResult(PersonData data)
     {
         var result = SleepPredictionService.Predict(data);
+        float predictedValue = float.Parse(result);
         string level = GetLevel(float.Parse(result));
 
         float totalScore = data.SleepHours + data.CaffeineHours + data.StressLevel + data.ActivityLevel + data.SleepQuality;
@@ -272,6 +273,7 @@ class Program
             StressLevel = data.StressLevel,
             ActivityLevel = data.ActivityLevel,
             SleepQuality = data.SleepQuality,
+            SleepHabits = predictedValue,
             PredictedLevel = level,
             TotalScore = totalScore
         };

@@ -8,7 +8,9 @@ namespace SleepApp.Models
         public float StressLevel { get; set; }
         public float ActivityLevel { get; set; }
         public float SleepQuality { get; set; }
-        public string PredictedLevel { get; set; } = "";
+
+        public float SleepHabits { get; set; } // nummervärde från modell
+        public string PredictedLevel { get; set; } = ""; // textvärde för användaren
         public float TotalScore { get; set; }
     }
 }

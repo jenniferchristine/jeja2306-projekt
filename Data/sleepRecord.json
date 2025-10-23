@@ -1,1 +1,13 @@
-[]
+[
+  {
+    "Date": "2025-10-23T14:20:43.3621666+02:00",
+    "SleepHours": 1,
+    "CaffeineHours": 1,
+    "StressLevel": 1,
+    "ActivityLevel": 1,
+    "SleepQuality": 1,
+    "SleepHabits": 1,
+    "PredictedLevel": "Poor",
+    "TotalScore": 5
+  }
+]
