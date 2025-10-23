@@ -15,8 +15,9 @@ namespace SleepApp
             var pipeline = mlContext.Transforms.Concatenate("Features", nameof(PersonData.SleepHours),
                                                                      nameof(PersonData.CaffeineHours),
                                                                      nameof(PersonData.StressLevel),
-                                                                     nameof(PersonData.ActivityLevel))
-                            .Append(mlContext.Regression.Trainers.Sdca(labelColumnName: nameof(PersonData.SleepQuality), maximumNumberOfIterations: 100));
+                                                                     nameof(PersonData.ActivityLevel),
+                                                                     nameof(PersonData.SleepQuality))
+                            .Append(mlContext.Regression.Trainers.Sdca(labelColumnName: nameof(PersonData.SleepHabits), maximumNumberOfIterations: 100));
 
             // tränar modell
             var model = pipeline.Fit(data);

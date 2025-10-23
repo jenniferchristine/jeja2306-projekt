@@ -18,5 +18,8 @@ namespace SleepApp.Models
 
         [LoadColumn(4)]
         public float SleepQuality { get; set; }
+
+        [LoadColumn(5)]
+        public float SleepHabits { get; set; } // label
     }
 }
