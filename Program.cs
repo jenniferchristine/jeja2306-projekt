@@ -35,7 +35,7 @@ class Program
         {
             Console.WriteLine("\nEnding program...");
             Thread.Sleep(1500);
-            TextColor("\n🛑 Test has ended.\n", ConsoleColor.Red);
+            TextColor("\n🛑 Program has ended.\n", ConsoleColor.Red);
             Environment.Exit(0);
         }
         else if (key == ConsoleKey.R)
@@ -50,7 +50,7 @@ class Program
 
             if (GetLatestTestDate())
             {
-                Console.WriteLine("\n⚠️  A test for today is already registered.");
+                Console.WriteLine("\n⚠️  A test for today is already registered. A new test will overwrite the existing one.");
                 Console.WriteLine("-- Press Y to continue with a new test or N to cancel.");
                 var confirm = Console.ReadKey(true).Key;
 
@@ -72,7 +72,7 @@ class Program
             {
                 Console.WriteLine("\nEnding program...");
                 Thread.Sleep(1500);
-                TextColor("\n🛑 Test has ended.\n", ConsoleColor.Red);
+                TextColor("\n🛑 Program has ended.\n", ConsoleColor.Red);
                 Environment.Exit(0);
             }
 
@@ -150,7 +150,7 @@ class Program
                 {
                     var recordToDelete = records[index - 1];
                     Console.WriteLine($"\n⚠️  Are you sure you want to delete the record from {recordToDelete.Date:yyyy-MM-dd}?");
-                    Console.WriteLine("-- Press Y to continue with a new test or N to cancel.");
+                    Console.WriteLine("-- Press Y to delete result or N to cancel.");
                     var confirm = Console.ReadKey(true).Key;
 
                     if (confirm == ConsoleKey.Y)
@@ -171,7 +171,7 @@ class Program
             {
                 Console.WriteLine("\nEnding program...");
                 Thread.Sleep(1500);
-                TextColor("\n🛑 Test has ended.\n", ConsoleColor.Red);
+                TextColor("\n🛑 Program has ended.\n", ConsoleColor.Red);
                 Environment.Exit(0);
             }
             else
@@ -229,7 +229,7 @@ class Program
             if (input.Trim().ToUpper() == "X")
             {
                 Console.Write("\n⚠️  Are you sure you want to exit? Your progress will not be saved.");
-                Console.WriteLine("-- Press Y to continue with a new test or N to cancel.");
+                Console.WriteLine("\n-- Press Y to end program or or N to continue test.");
                 if (Console.ReadKey(true).Key == ConsoleKey.Y)
                 {
                     Console.WriteLine("\nEnding program...");
@@ -246,7 +246,7 @@ class Program
             }
 
             Console.WriteLine("\n❗ Invalid input. Choose 1, 2 or 3.");
-            Thread.Sleep(1000);
+            Thread.Sleep(1500);
         }
     }
 
@@ -310,7 +310,7 @@ class Program
         Console.WriteLine("- Activity Level: " + (record.ActivityLevel switch { 1 => "Low", 2 => "Medium", 3 => "High", _ => "Unknown" }) + " | " + GetLevel(record.ActivityLevel));
         Console.WriteLine("- Sleep Quality: " + (record.SleepQuality switch { 1 => "Poor", 2 => "Average", 3 => "Good", _ => "Unknown" }) + " | " + GetLevel(record.SleepQuality));
 
-        Console.WriteLine("\nTotal Score: " + record.TotalScore + " / 15\n5–7 → Poor\n8–11 → Average\n12–15 → Good\n");
+        Console.WriteLine("\nTotal Score: " + record.TotalScore + " / 15\n\n5–7 → Poor\n8–11 → Average\n12–15 → Good\n");
 
         if (record.SleepHours == 1)
         {
