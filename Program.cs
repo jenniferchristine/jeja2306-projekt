@@ -307,6 +307,11 @@ class Program
         };
         Console.WriteLine(description + "\n");
 
+                if (record.SleepHours == 1)
+        {
+            TextColor("⚠️  Note: You are getting very little sleep hours. Try to rest more!\n", ConsoleColor.Red);
+        }
+
         Console.WriteLine("\n📈 Result of your answers:\n");
         Console.WriteLine("- Sleep Hours: " + (record.SleepHours switch { 1 => "1-2h", 2 => "3-6h", 3 => "7-8h", _ => "Unknown" }) + " | " + GetLevel(record.SleepHours));
         Console.WriteLine("- Caffeine Hours: " + (record.CaffeineHours switch { 1 => "1-5h before bed", 2 => "3-6h before bed", 3 => "7-8h before bed", _ => "Unknown" }) + " | " + GetLevel(record.CaffeineHours));
@@ -315,11 +320,6 @@ class Program
         Console.WriteLine("- Sleep Quality: " + (record.SleepQuality switch { 1 => "Poor", 2 => "Average", 3 => "Good", _ => "Unknown" }) + " | " + GetLevel(record.SleepQuality));
 
         Console.WriteLine("\nTotal Score: " + record.TotalScore + " / 15\n\n5–7 → Poor\n8–11 → Average\n12–15 → Good\n");
-
-        if (record.SleepHours == 1)
-        {
-            TextColor("⚠️  Note: You are getting very little sleep hours. Try to rest more!\n", ConsoleColor.Red);
-        }
 
         ShowFooter(94);
     }
