@@ -20,16 +20,5 @@
     "SleepHabits": 2,
     "PredictedLevel": "Average",
     "TotalScore": 9
-  },
-  {
-    "Date": "2025-10-28T11:32:53.2222507+01:00",
-    "SleepHours": 1,
-    "CaffeineHours": 3,
-    "StressLevel": 3,
-    "ActivityLevel": 3,
-    "SleepQuality": 3,
-    "SleepHabits": 1,
-    "PredictedLevel": "Poor",
-    "TotalScore": 13
   }
 ]
