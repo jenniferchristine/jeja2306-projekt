@@ -1,6 +1,6 @@
 [
   {
-    "Date": "2025-10-23T14:20:43.3621666+02:00",
+    "Date": "2025-10-28T19:38:48.3610767+01:00",
     "SleepHours": 1,
     "CaffeineHours": 1,
     "StressLevel": 1,
@@ -9,16 +9,5 @@
     "SleepHabits": 1,
     "PredictedLevel": "Poor",
     "TotalScore": 5
-  },
-  {
-    "Date": "2025-10-28T12:43:03.4625395+01:00",
-    "SleepHours": 1,
-    "CaffeineHours": 3,
-    "StressLevel": 3,
-    "ActivityLevel": 3,
-    "SleepQuality": 3,
-    "SleepHabits": 1,
-    "PredictedLevel": "Poor",
-    "TotalScore": 13
   }
 ]
