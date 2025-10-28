@@ -1,3 +1,5 @@
+/* Tjänst för att ladda ner ML-modell och förutse sömnnvane-nivå baserat på PersonData */
+
 using Microsoft.ML;
 using Microsoft.ML.Data;
 using SleepApp.Models;

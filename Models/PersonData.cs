@@ -1,3 +1,5 @@
+/* Klass för användardata som matas in i programmet för att förutsäga sömnvane-nivå med ML */
+
 using Microsoft.ML.Data;
 
 namespace SleepApp.Models
