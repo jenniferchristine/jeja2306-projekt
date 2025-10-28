@@ -56,7 +56,7 @@ class Program
 
                 if (confirm != ConsoleKey.Y)
                 {
-                    Console.WriteLine("\n🛑 Test cancelled\nReturning to start menu...");
+                    Console.WriteLine("\n🛑 Test cancelled\n\nReturning to start menu...");
                     Thread.Sleep(1500);
                     return;
                 }
@@ -229,13 +229,15 @@ class Program
             if (input.Trim().ToUpper() == "X")
             {
                 Console.Write("\n⚠️  Are you sure you want to exit? Your progress will not be saved.");
-                Console.WriteLine("\n-- Press Y to end program or or N to continue test.");
+                Console.WriteLine("\n-- Press Y to end test or N to continue test.");
                 if (Console.ReadKey(true).Key == ConsoleKey.Y)
                 {
-                    Console.WriteLine("\nEnding program...");
+                    Console.WriteLine("\nEnding test...");
                     Thread.Sleep(1500);
                     TextColor("\n🛑 Test has ended.\n", ConsoleColor.Red);
-                    Environment.Exit(0);
+                    Console.WriteLine("Returning to menu...");
+                    Thread.Sleep(1500);
+                    Main();
                 }
                 continue;
             }
