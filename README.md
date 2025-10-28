@@ -10,7 +10,7 @@ SleepApp är en interaktiv applikation som hjälper dig att kartlägga dina söm
 
 #### Användning av appen:
 - Starta programmet
-- Tryck Enter för att påbörja nytt test, Y för att visa tidigare resultat eller X för att avsluta programmet.
+- Tryck Enter för att påbörja nytt test, R för att visa tidigare resultat eller X för att avsluta programmet.
 - Svara på 5st frågor genom att skriva siffran för det alternativ som passar dig bäst och Enter.
 - Följ instruktioner under programmets gång för att avsluta programmet.
 - Ditt resultat visas med en färgkodad indikator och tips för att förbättra din sömn.
@@ -19,6 +19,7 @@ SleepApp är en interaktiv applikation som hjälper dig att kartlägga dina söm
 #### Funktioner
 - 📊 Sömnregistrering - Du svarar på frågor kring sömntimmar, stress, koffeinintag och aktivitet.
 - 🗓️ Historik - Se datum och resultat för tidigare test.
+- 🗑️ Radera historik - Ta bort ett specifikt resultat.
 - ⚠️ Varningssystem - Om ett test redan registrerats för idag får du en varning innan nytt test sparas.
 - 🤖 Maskininlärning - Förutsägelse av sömnkvalitet baserat på dina svar.
 - 🌙 Tips och rekommendationer - Feedback (poor, average, good) baserat på nivå av sömnvanor.
